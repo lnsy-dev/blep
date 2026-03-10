@@ -79,7 +79,13 @@ HTML;
 
             if ($firstDetail) {
                 $src = htmlspecialchars("{$firstDetail['file']}:{$firstDetail['line']}");
-                $content .= "<p class=\"src-location\">$src</p>\n";
+                $blameInfo = '';
+                if (isset($firstDetail['blame'])) {
+                    $date = date('Y-m-d H:i', $firstDetail['blame']['timestamp']);
+                    $author = htmlspecialchars($firstDetail['blame']['author']);
+                    $blameInfo = " — last updated $date by $author";
+                }
+                $content .= "<p class=\"src-location\">$src$blameInfo</p>\n";
             }
 
             $content .= "<ul>\n";

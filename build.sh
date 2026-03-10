@@ -26,6 +26,11 @@ echo "// === BLHtmlGenerator ===" >> "$TEMP_FILE"
 tail -n +2 BLHtmlGenerator.php >> "$TEMP_FILE"
 echo '' >> "$TEMP_FILE"
 
+# Add BLMarkdownGenerator class (strip opening <?php tag)
+echo "// === BLMarkdownGenerator ===" >> "$TEMP_FILE"
+tail -n +2 BLMarkdownGenerator.php >> "$TEMP_FILE"
+echo '' >> "$TEMP_FILE"
+
 # Add main CLI logic (strip shebang, <?php, require statements, and VERSION constant)
 echo "// === Main CLI ===" >> "$TEMP_FILE"
 sed -e '1,/^const VERSION/d' -e '/^require_once/d' bl-doc-gen.php >> "$TEMP_FILE"
@@ -39,3 +44,9 @@ mv "$TEMP_FILE" "$OUTPUT"
 echo "✓ Build complete: $OUTPUT"
 echo "  Size: $(wc -c < "$OUTPUT") bytes"
 echo "  Test with: ./$OUTPUT --help"
+
+# Re-render docs
+echo ""
+echo "Re-rendering docs..."
+./"$OUTPUT" example/src -o bl-docs
+echo "✓ Docs updated: bl-docs/"

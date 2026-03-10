@@ -74,7 +74,8 @@ class BLParser
                     'text' => $text,
                     'file' => basename($filePath),
                     'line' => $lineNumber,
-                    'snippet' => $this->extractSnippet($lines, $lineNum)
+                    'snippet' => $this->extractSnippet($lines, $lineNum),
+                    'blame' => $this->getGitBlame($filePath, $lineNumber)
                 ];
             } elseif ($tag === 'see') {
                 if ($currentTopic === null) {
@@ -123,6 +124,28 @@ class BLParser
     public function getWarnings(): array
     {
         return $this->warnings;
+    }
+
+    private function getGitBlame(string $filePath, int $lineNumber): ?array
+    {
+        $output = shell_exec("git blame -L $lineNumber,$lineNumber --porcelain " . escapeshellarg($filePath) . " 2>/dev/null");
+        if (!$output) {
+            return null;
+        }
+        
+        $lines = explode("\n", $output);
+        $author = null;
+        $timestamp = null;
+        
+        foreach ($lines as $line) {
+            if (preg_match('/^author (.+)$/', $line, $m)) {
+                $author = $m[1];
+            } elseif (preg_match('/^author-time (\d+)$/', $line, $m)) {
+                $timestamp = (int)$m[1];
+            }
+        }
+        
+        return $author && $timestamp ? ['author' => $author, 'timestamp' => $timestamp] : null;
     }
 
     private function extractSnippet(array $lines, int $centerLine, int $contextLines = 3): string

@@ -2,6 +2,9 @@
 bldoc
 bl-docs/
 test-output*/
+example/output/
+example/docs/
+tests/output/
 
 # IDE
 .idea/

@@ -2,18 +2,32 @@
 
 ## Installation
 
-1. Download the single-file version:
-   ```bash
-   curl -O https://raw.githubusercontent.com/yourusername/bl-doc-gen/main/bldoc
-   chmod +x bldoc
-   ```
+### Option 1: Composer (Recommended)
 
-2. Or build from source:
-   ```bash
-   git clone https://github.com/yourusername/bl-doc-gen.git
-   cd bl-doc-gen
-   ./build.sh
-   ```
+```bash
+composer global require blep/blep
+```
+
+Then use `bldoc` from anywhere:
+
+```bash
+bldoc src/
+```
+
+### Option 2: Download single-file
+
+```bash
+curl -O https://raw.githubusercontent.com/yourusername/blep/main/bldoc
+chmod +x bldoc
+```
+
+### Option 3: Build from source
+
+```bash
+git clone https://github.com/yourusername/blep.git
+cd blep
+./build.sh
+```
 
 ## Basic Usage
 

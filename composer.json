@@ -1,0 +1,22 @@
+{
+    "name": "blep/blep",
+    "description": "Business Logic Documentation Generator - Extract @bl-* tags from PHP code and generate clean HTML documentation",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["documentation", "business-logic", "php", "generator"],
+    "require": {
+        "php": ">=7.4"
+    },
+    "bin": {
+        "bldoc": "bldoc"
+    },
+    "autoload": {
+        "classmap": [
+            "BLParser.php",
+            "BLHtmlGenerator.php"
+        ]
+    },
+    "scripts": {
+        "build": "./build.sh"
+    }
+}

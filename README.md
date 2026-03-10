@@ -1,4 +1,8 @@
-# Business Logic Documentation Generator
+# Blep - Business Logic Documentation Generator
+
+[![PHP Version](https://img.shields.io/badge/php-%3E%3D7.4-blue)](https://php.net)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![GitHub Pages](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://yourusername.github.io/blep)
 
 A lightweight PHP tool that extracts business logic documentation from code comments and generates a clean, browsable static HTML site.
 
@@ -17,22 +21,46 @@ Document your application's business rules, workflows, and domain logic directly
 
 ## Installation
 
-### Option 1: Single-file (Recommended)
-
-Download the standalone `bldoc` file:
+### Option 1: Composer (Recommended)
 
 ```bash
-curl -O https://example.com/bldoc
+composer global require blep/blep
+```
+
+### Option 2: Single-file download
+
+```bash
+curl -O https://github.com/yourusername/blep/releases/latest/download/bldoc
 chmod +x bldoc
 ```
 
-### Option 2: From source
+### Option 3: From source
 
 ```bash
-git clone https://github.com/yourusername/bl-doc-gen.git
-cd bl-doc-gen
+git clone https://github.com/yourusername/blep.git
+cd blep
 ./build.sh  # Creates single-file 'bldoc'
 ```
+
+## Quick Start
+
+1. **Add tags to your PHP code:**
+   ```php
+   /**
+    * @bl-topic Order Processing
+    * @bl-detail Orders over $1000 require manager approval
+    */
+   ```
+
+2. **Generate documentation:**
+   ```bash
+   ./bldoc src/
+   ```
+
+3. **Browse your docs:**
+   ```bash
+   open bl-docs/index.html
+   ```
 
 ## Usage
 
@@ -69,11 +97,17 @@ php bl-doc-gen.php -v src/ lib/
 | `-h, --help` | Show help message | — |
 | `--version` | Show version | — |
 
+## Documentation
+
+- [Quick Start Guide](docs/quickstart.md)
+- [CLI Reference](docs/cli-reference.md)
+- [Project Structure](docs/project-structure.md)
+
 ## Tag Reference
 
 ### `@bl-topic`
 
-Defines a top-level documentation topic. All subsequent `@bl-subtopic` and `@bl-detail` tags belong to this topic until a new `@bl-topic` is encountered.
+Defines a top-level documentation topic.
 
 ```php
 /**
@@ -86,7 +120,7 @@ class OrderService {
 
 ### `@bl-subtopic`
 
-Creates a subsection within the current topic. Groups related details together.
+Creates a subsection within the current topic.
 
 ```php
 /**
@@ -97,12 +131,11 @@ Creates a subsection within the current topic. Groups related details together.
 
 ### `@bl-detail` / `@bl-details`
 
-Documents a specific business rule, constraint, or workflow step. Can be used in docblocks or inline comments.
+Documents a specific business rule or workflow step.
 
 ```php
 /**
  * @bl-detail Orders over $1000 require manager approval
- * @bl-detail Shipping address must be validated against USPS API
  */
 public function createOrder($data) {
     // @bl-detail Inventory is reserved for 15 minutes during checkout
@@ -112,7 +145,7 @@ public function createOrder($data) {
 
 ### `@bl-see`
 
-Creates a cross-reference to another topic or subtopic.
+Creates cross-references to related topics.
 
 ```php
 /**
@@ -121,62 +154,14 @@ Creates a cross-reference to another topic or subtopic.
  */
 ```
 
-Format: `@bl-see Topic Name` or `@bl-see Topic Name: Subtopic Name`
-
-## Example
-
-### Input (PHP file)
-
-```php
-<?php
-
-/**
- * @bl-topic User Registration
- * @bl-subtopic Email Validation
- * @bl-detail Email must be unique across all users
- * @bl-detail Disposable email domains are blocked (see config/blocked-domains.txt)
- */
-class UserRegistration {
-    
-    public function register($email, $password) {
-        // @bl-detail Password must be at least 12 characters
-        // @bl-detail Password must contain uppercase, lowercase, number, and symbol
-        
-        if (!$this->validatePassword($password)) {
-            throw new ValidationException();
-        }
-        
-        /**
-         * @bl-subtopic Account Activation
-         * @bl-detail Activation email expires after 24 hours
-         * @bl-detail Users can request new activation email up to 3 times
-         * @bl-see Email Delivery: Rate Limiting
-         */
-        $this->sendActivationEmail($email);
-    }
-}
-```
-
-### Output
+## Example Output
 
 The tool generates:
 
 - `bl-docs/index.html` — Lists all topics
-- `bl-docs/topic-user-registration.html` — Topic page with subtopics and details
+- `bl-docs/topic-order-processing.html` — Individual topic pages
 
 Each detail includes the source file and line number for easy reference.
-
-## Output Structure
-
-```
-bl-docs/
-├── index.html                      # Topic index
-├── topic-order-processing.html     # Individual topic pages
-├── topic-user-registration.html
-└── topic-payment-processing.html
-```
-
-The generated site is fully self-contained with embedded CSS. No external dependencies or build steps required.
 
 ## Requirements
 
@@ -184,17 +169,6 @@ The generated site is fully self-contained with embedded CSS. No external depend
 - No PHP extensions required beyond standard installation
 
 ## Development
-
-### Project structure
-
-```
-bl-doc-gen/
-├── BLParser.php           # Parses @bl-* tags from PHP files
-├── BLHtmlGenerator.php    # Generates HTML documentation site
-├── bl-doc-gen.php         # CLI entry point
-├── build.sh               # Creates single-file distributable
-└── README.md
-```
 
 ### Building
 
@@ -207,60 +181,24 @@ Creates `bldoc` — a single-file version with all classes bundled.
 ### Testing
 
 ```bash
-# Test on sample project
-php bl-doc-gen.php -v examples/
+# Test on example project
+php bl-doc-gen.php -v example/src/
 
-# Test single-file version
-./bldoc examples/
+# Run test suite
+php tests/run-tests.php
 ```
-
-## Tips
-
-1. **Organize by domain concepts** — Use topics like "Order Processing", "User Authentication", "Payment Rules" rather than technical class names
-2. **Document the "why"** — Focus on business rules and constraints, not implementation details
-3. **Keep details concise** — One rule per `@bl-detail` tag
-4. **Use cross-references** — Link related topics with `@bl-see` to show relationships
-5. **Update as you code** — Add tags when implementing new business logic
-
-## Warnings
-
-The tool will warn you about:
-
-- `@bl-subtopic` without a preceding `@bl-topic`
-- `@bl-detail` without a preceding `@bl-topic`
-- `@bl-see` without a preceding `@bl-topic`
-- Unreadable files or directories
-
-These warnings don't stop generation but help you fix documentation structure.
-
-## License
-
-MIT License
-
-Copyright (c) 2026
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
 
 ## Contributing
 
-Contributions welcome! Please open an issue or pull request.
+Contributions welcome! Please see [CONTRIBUTING.md](.github/CONTRIBUTING.md) for guidelines.
 
-## Support
+## License
 
-For bugs or feature requests, please open an issue on GitHub.
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## Links
+
+- [Documentation](https://yourusername.github.io/blep)
+- [GitHub Repository](https://github.com/yourusername/blep)
+- [Issue Tracker](https://github.com/yourusername/blep/issues)
+- [Releases](https://github.com/yourusername/blep/releases)

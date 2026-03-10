@@ -5,6 +5,7 @@ const VERSION = '1.0.0';
 
 require_once __DIR__ . '/BLParser.php';
 require_once __DIR__ . '/BLHtmlGenerator.php';
+require_once __DIR__ . '/BLMarkdownGenerator.php';
 
 function printUsage(): void
 {
@@ -230,6 +231,9 @@ if (empty($data)) {
 try {
     $generator = new BLHtmlGenerator($data, $options['output'], ['title' => $options['title']]);
     $generator->generate();
+    
+    $mdGenerator = new BLMarkdownGenerator($data, $options['output'], ['title' => $options['title']]);
+    $mdGenerator->generate();
     
     $indexPath = realpath($options['output'] . '/index.html');
     echo "✓ Site generated successfully\n";
