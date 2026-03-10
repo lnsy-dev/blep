@@ -162,9 +162,11 @@ HTML;
         return <<<CSS
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Courier New', monospace; line-height: 1.6; color: #000; background: #fff; max-width: 900px; margin: 0 auto; padding: 20px; }
-h1 { font-size: 1.5rem; margin-bottom: 20px; font-weight: normal; border-bottom: 2px solid #000; padding-bottom: 10px; }
-h2 { font-size: 1.2rem; margin: 30px 0 10px 0; font-weight: normal; border-bottom: 1px solid #000; padding-bottom: 5px; }
+html { height: 100%; }
+body { font-family: 'Courier New', monospace; line-height: 1.6; color: #000; background: #fff; max-width: 900px; margin: 0 auto; padding: 20px; min-height: 100vh; display: flex; flex-direction: column; }
+body > *:not(footer) { flex-shrink: 0; }
+h1 { font-size: 1.5rem; margin-bottom: 20px; font-weight: normal; border-bottom: 2px solid #ccc; padding-bottom: 10px; }
+h2 { font-size: 1.2rem; margin: 30px 0 10px 0; font-weight: normal; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
 ul { list-style: none; padding-left: 20px; }
 li { margin: 8px 0; }
 li::before { content: "- "; }
@@ -175,17 +177,17 @@ a:hover { background: #000; color: #fff; }
 .subtitle { font-size: 0.9em; margin-top: -10px; margin-bottom: 20px; }
 details { margin: 10px 0; }
 details summary { cursor: pointer; text-decoration: underline; }
-details.code-block { border: 1px solid #000; padding: 10px; margin: 15px 0; }
-details.history-block { border: 1px solid #000; padding: 10px; margin: 10px 0; font-size: 0.9em; }
+details.code-block { border: 1px solid #ccc; padding: 10px; margin: 15px 0; }
+details.history-block { border: 1px solid #ccc; padding: 10px; margin: 10px 0; font-size: 0.9em; }
 details.history-block ul { padding-left: 0; }
 details.history-block li::before { content: ""; }
 details.rationale-block { display: inline-block; margin-left: 8px; font-size: 0.9em; }
-details.rationale-block p { margin: 8px 0; padding: 8px; border: 1px solid #000; }
-pre { background: #f5f5f5; border: 1px solid #000; padding: 15px; overflow-x: auto; margin: 10px 0; }
+details.rationale-block p { margin: 8px 0; padding: 8px; border: 1px solid #ccc; }
+pre { background: #f5f5f5; border: 1px solid #ccc; padding: 15px; overflow-x: auto; margin: 10px 0; }
 code { font-family: 'Courier New', monospace; }
-nav { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #000; }
-footer { margin-top: 40px; padding-top: 20px; border-top: 2px solid #000; }
-.changelog-item { border-left: 2px solid #000; padding-left: 15px; margin-bottom: 30px; }
+nav { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #ccc; }
+footer { margin-top: auto; padding-top: 20px; border-top: 2px solid #ccc; }
+.changelog-item { border-left: 2px solid #ccc; padding-left: 15px; margin-bottom: 30px; }
 .changelog-meta { font-size: 0.9em; margin-bottom: 5px; }
 .changelog-date { margin-right: 10px; }
 .changelog-hash { margin-right: 10px; }
@@ -289,23 +291,25 @@ HTML;
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Courier New', monospace; line-height: 1.6; color: #000; background: #fff; max-width: 900px; margin: 0 auto; padding: 20px; }
-h1 { font-size: 1.5rem; margin-bottom: 20px; font-weight: normal; border-bottom: 2px solid #000; padding-bottom: 10px; }
-nav { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #000; }
+html { height: 100%; }
+body { font-family: 'Courier New', monospace; line-height: 1.6; color: #000; background: #fff; max-width: 900px; margin: 0 auto; padding: 20px; min-height: 100vh; display: flex; flex-direction: column; }
+body > *:not(footer) { flex-shrink: 0; }
+h1 { font-size: 1.5rem; margin-bottom: 20px; font-weight: normal; border-bottom: 2px solid #ccc; padding-bottom: 10px; }
+nav { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #ccc; }
 a { color: #000; text-decoration: underline; }
 a:hover { background: #000; color: #fff; }
-footer { margin-top: 40px; padding-top: 20px; border-top: 2px solid #000; }
-#search-input { width: 100%; padding: 10px; font-size: 1rem; font-family: 'Courier New', monospace; border: 2px solid #000; margin-bottom: 20px; }
+footer { margin-top: auto; padding-top: 20px; border-top: 2px solid #ccc; }
+#search-input { width: 100%; padding: 10px; font-size: 1rem; font-family: 'Courier New', monospace; border: 2px solid #ccc; margin-bottom: 20px; }
 #search-input:focus { outline: none; }
-.search-card { border: 1px solid #000; padding: 15px; margin-bottom: 15px; }
-.topic-badge { display: inline-block; background: #000; color: #fff; padding: 2px 8px; margin-right: 8px; }
+.search-card { border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; }
+.topic-badge { display: inline-block; background: #ccc; color: #000; padding: 2px 8px; margin-right: 8px; }
 .subtopic-title { margin: 8px 0; }
 .detail-text { margin: 8px 0; }
-.code-preview { background: #f5f5f5; border: 1px solid #000; padding: 10px; margin: 8px 0; font-size: 0.9em; overflow-x: auto; max-height: 150px; overflow-y: auto; }
+.code-preview { background: #f5f5f5; border: 1px solid #ccc; padding: 10px; margin: 8px 0; font-size: 0.9em; overflow-x: auto; max-height: 150px; overflow-y: auto; }
 .meta-info { font-size: 0.9em; margin-top: 8px; }
 .view-link { display: inline-block; margin-top: 8px; }
 .empty-state { text-align: center; padding: 40px; }
-mark { background: #000; color: #fff; padding: 2px 4px; }
+mark { background: #ccc; color: #000; padding: 2px 4px; }
 </style>
 </head>
 <body>
