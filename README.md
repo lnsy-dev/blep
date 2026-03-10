@@ -12,12 +12,15 @@ Document your application's business rules, workflows, and domain logic directly
 
 ## Features
 
-- **Simple annotation syntax** — Use `@bl-topic`, `@bl-subtopic`, `@bl-detail`, and `@bl-see` tags in comments
+- **Simple annotation syntax** — Use `@bl-topic`, `@bl-subtopic`, `@bl-detail`, `@bl-rationale`, and `@bl-see` tags in comments
 - **Zero dependencies** — Pure PHP 7.4+, no external libraries required
 - **Single-file distribution** — Download one file and run it
 - **Fast scanning** — Recursively processes directories
 - **Clean HTML output** — Responsive, readable documentation site
 - **Cross-references** — Link related topics with `@bl-see`
+- **Change history** — Track business rule changes over time with git integration
+- **Interactive search** — Full-text search powered by Fuse.js
+- **Rationale tracking** — Document why rules exist with `@bl-rationale`
 
 ## Installation
 
@@ -143,6 +146,20 @@ public function createOrder($data) {
 }
 ```
 
+### `@bl-rationale`
+
+Documents the reasoning behind a business rule.
+
+```php
+/**
+ * @bl-topic Order Processing
+ * @bl-rationale We require manager approval for large orders to prevent fraud
+ * @bl-detail Orders over $1000 require manager approval
+ */
+```
+
+The rationale appears in a collapsible "Why?" section next to the detail.
+
 ### `@bl-see`
 
 Creates cross-references to related topics.
@@ -158,10 +175,19 @@ Creates cross-references to related topics.
 
 The tool generates:
 
-- `bl-docs/index.html` — Lists all topics
-- `bl-docs/topic-order-processing.html` — Individual topic pages
+- `bl-docs/index.html` — Lists all topics with links to search and changelog
+- `bl-docs/topic-*.html` — Individual topic pages with inline history and rationale
+- `bl-docs/search.html` — Interactive search interface powered by Fuse.js
+- `bl-docs/search-index.json` — Search index for client-side searching
+- `bl-docs/changelog.html` — Timeline of all business rule changes
+- `bl-docs/*.md` — Markdown versions of all documentation
 
-Each detail includes the source file and line number for easy reference.
+Each detail includes:
+- Source file and line number for easy reference
+- Last modified date and author (from git blame)
+- Recent change history (last 5 commits affecting that line)
+- Rationale in collapsible "Why?" sections
+- Code snippets in collapsible sections
 
 ## Requirements
 

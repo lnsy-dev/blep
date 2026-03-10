@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Returns Policy - Business Logic Documentation</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+:root {
+  color-scheme: light dark;
+}
+body { font-family: 'Courier New', monospace; max-width: 900px; margin: 40px auto; padding: 0 20px; background: #fafafa; color: #222; line-height: 1.6; }
+h1 { border-bottom: 2px solid #333; padding-bottom: 10px; }
+h2 { margin-top: 30px; color: #444; }
+ul { list-style: square; }
+li { margin: 8px 0; }
+a { color: #0066cc; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.unresolved { color: #cc0000; text-decoration: line-through; }
+.src-location { font-size: 0.85em; color: #666; font-style: italic; margin: 8px 0; }
+details.code-block { margin: 16px 0; }
+details.code-block summary { cursor: pointer; color: #0066cc; font-weight: bold; }
+pre { background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px; padding: 16px; overflow-x: auto; margin: 8px 0; }
+code { font-family: 'Courier New', Consolas, monospace; font-size: 0.9em; }
+nav { margin-bottom: 20px; }
+footer { margin-top: 50px; padding-top: 20px; border-top: 1px solid #ccc; font-size: 0.9em; color: #666; }
+@media (prefers-color-scheme: dark) {
+  body { background: #282828; color: #ebdbb2; }
+  h1 { border-bottom-color: #a89984; }
+  h2 { color: #d5c4a1; }
+  a { color: #83a598; }
+  .unresolved { color: #fb4934; }
+  .src-location { color: #928374; }
+  details.code-block summary { color: #83a598; }
+  pre { background: #3c3836; border-color: #504945; }
+  footer { border-top-color: #504945; color: #928374; }
+}
+@media (max-width: 600px) { body { margin: 20px auto; font-size: 14px; } }
+</style>
+</head>
+<body>
+<nav><a href="index.html">← Back to Index</a></nav>
+<h1>Returns Policy</h1>
+<h2 id="return-window">Return Window</h2>
+<p class="src-location">ReturnProcessor.php:6 — last updated 2026-03-10 01:25 by lnsy</p>
+<ul>
+<li>Standard return window is 30 days from delivery</li>
+<li>Electronics have 14-day return window</li>
+<li>Final sale items cannot be returned</li>
+<li>Opened software/media cannot be returned unless defective</li>
+</ul>
+<details class="code-block"><summary>code</summary><pre><code class="language-php">class ReturnProcessor {
+    
+    /**
+     * @bl-subtopic Return Shipping
+     * @bl-detail Customer pays return shipping unless item is defective
+     * @bl-detail Defective items get prepaid return label
+     * @bl-detail Return shipping cost is deducted from refund
+     * @bl-see Shipping: Shipping Methods
+     */
+    public function initiateReturn($order) {
+        // Implementation
+    }
+    
+    /**
+     * @bl-subtopic Refund Processing
+     * @bl-detail Refunds issued to original payment method
+     * @bl-detail Refunds processed within 5-7 business days of receiving return
+     * @bl-detail Restocking fee of 15% for non-defective electronics
+     * @bl-detail Store credit issued immediately, no restocking fee
+     */
+    public function processRefund($return) {
+        // Implementation
+    }
+}</code></pre></details>
+<h2 id="return-shipping">Return Shipping</h2>
+<p class="src-location">ReturnProcessor.php:15 — last updated 2026-03-10 01:25 by lnsy</p>
+<ul>
+<li>Customer pays return shipping unless item is defective</li>
+<li>Defective items get prepaid return label</li>
+<li>Return shipping cost is deducted from refund</li>
+<li>See: <a href="topic-shipping.html#shipping-methods">Shipping → Shipping Methods</a></li>
+</ul>
+<details class="code-block"><summary>code</summary><pre><code class="language-php">    public function initiateReturn($order) {
+        // Implementation
+    }</code></pre></details>
+<h2 id="refund-processing">Refund Processing</h2>
+<p class="src-location">ReturnProcessor.php:26 — last updated 2026-03-10 01:25 by lnsy</p>
+<ul>
+<li>Refunds issued to original payment method</li>
+<li>Refunds processed within 5-7 business days of receiving return</li>
+<li>Restocking fee of 15% for non-defective electronics</li>
+<li>Store credit issued immediately, no restocking fee</li>
+</ul>
+<details class="code-block"><summary>code</summary><pre><code class="language-php">    public function processRefund($return) {
+        // Implementation
+    }</code></pre></details>
+
+<footer>Generated on 2026-03-10 02:06:49</footer>
+</body>
+</html>

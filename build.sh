@@ -31,6 +31,11 @@ echo "// === BLMarkdownGenerator ===" >> "$TEMP_FILE"
 tail -n +2 BLMarkdownGenerator.php >> "$TEMP_FILE"
 echo '' >> "$TEMP_FILE"
 
+# Add BLSearchIndexGenerator class (strip opening <?php tag)
+echo "// === BLSearchIndexGenerator ===" >> "$TEMP_FILE"
+tail -n +2 BLSearchIndexGenerator.php >> "$TEMP_FILE"
+echo '' >> "$TEMP_FILE"
+
 # Add main CLI logic (strip shebang, <?php, require statements, and VERSION constant)
 echo "// === Main CLI ===" >> "$TEMP_FILE"
 sed -e '1,/^const VERSION/d' -e '/^require_once/d' bl-doc-gen.php >> "$TEMP_FILE"

@@ -15,6 +15,7 @@ class BLParser
         $lines = file($filePath, FILE_IGNORE_NEW_LINES);
         $currentTopic = null;
         $currentSubtopic = null;
+        $currentRationale = null;
         $inDocblock = false;
 
         foreach ($lines as $lineNum => $line) {
@@ -29,10 +30,10 @@ class BLParser
             }
 
             // Extract @bl-* tags
-            if ($inDocblock && preg_match('#@bl-(topic|subtopic|detail|details|see)\s+(.+)#', $line, $m)) {
+            if ($inDocblock && preg_match('#@bl-(topic|subtopic|detail|details|see|rationale)\s+(.+)#', $line, $m)) {
                 $tag = $m[1];
                 $text = trim($m[2]);
-            } elseif (preg_match('#//\s*@bl-(detail|details|see)\s+(.+)#', $line, $m)) {
+            } elseif (preg_match('#//\s*@bl-(detail|details|see|rationale)\s+(.+)#', $line, $m)) {
                 $tag = $m[1];
                 $text = trim($m[2]);
             } else {
@@ -48,6 +49,7 @@ class BLParser
             if ($tag === 'topic') {
                 $currentTopic = $text;
                 $currentSubtopic = null;
+                $currentRationale = null;
                 if (!isset($this->data[$currentTopic])) {
                     $this->data[$currentTopic] = [];
                 }
@@ -57,9 +59,12 @@ class BLParser
                     continue;
                 }
                 $currentSubtopic = $text;
+                $currentRationale = null;
                 if (!isset($this->data[$currentTopic][$currentSubtopic])) {
                     $this->data[$currentTopic][$currentSubtopic] = [];
                 }
+            } elseif ($tag === 'rationale') {
+                $currentRationale = $text;
             } elseif ($tag === 'detail') {
                 if ($currentTopic === null) {
                     $this->warnings[] = "$filePath:$lineNumber: @bl-detail without @bl-topic";
@@ -73,10 +78,14 @@ class BLParser
                     'type' => 'detail',
                     'text' => $text,
                     'file' => basename($filePath),
+                    'fullPath' => $filePath,
                     'line' => $lineNumber,
                     'snippet' => $this->extractSnippet($lines, $lineNum),
-                    'blame' => $this->getGitBlame($filePath, $lineNumber)
+                    'blame' => $this->getGitBlame($filePath, $lineNumber),
+                    'history' => $this->getGitHistory($filePath, $lineNumber),
+                    'rationale' => $currentRationale
                 ];
+                $currentRationale = null;
             } elseif ($tag === 'see') {
                 if ($currentTopic === null) {
                     $this->warnings[] = "$filePath:$lineNumber: @bl-see without @bl-topic";
@@ -146,6 +155,34 @@ class BLParser
         }
         
         return $author && $timestamp ? ['author' => $author, 'timestamp' => $timestamp] : null;
+    }
+
+    private function getGitHistory(string $filePath, int $lineNumber, int $limit = 10): array
+    {
+        $output = shell_exec("git log -L $lineNumber,$lineNumber:" . escapeshellarg($filePath) . " --pretty=format:'%H|%an|%at|%s' -n $limit 2>/dev/null");
+        if (!$output) {
+            return [];
+        }
+        
+        $history = [];
+        $lines = explode("\n", trim($output));
+        
+        foreach ($lines as $line) {
+            if (strpos($line, '|') === false) {
+                continue;
+            }
+            $parts = explode('|', $line, 4);
+            if (count($parts) === 4) {
+                $history[] = [
+                    'hash' => $parts[0],
+                    'author' => $parts[1],
+                    'timestamp' => (int)$parts[2],
+                    'message' => $parts[3]
+                ];
+            }
+        }
+        
+        return array_slice($history, 0, $limit);
     }
 
     private function extractSnippet(array $lines, int $centerLine, int $contextLines = 3): string
