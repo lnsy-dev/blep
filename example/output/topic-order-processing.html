@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Processing - E-Commerce Business Rules</title>
+<style>
+body { font-family: 'Courier New', monospace; max-width: 900px; margin: 40px auto; padding: 0 20px; background: #fafafa; color: #222; line-height: 1.6; }
+h1 { border-bottom: 2px solid #333; padding-bottom: 10px; }
+h2 { margin-top: 30px; color: #444; }
+ul { list-style: square; }
+li { margin: 8px 0; }
+a { color: #0066cc; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.unresolved { color: #cc0000; text-decoration: line-through; }
+details.src { display: inline; font-size: 0.85em; color: #666; font-style: italic; }
+summary { cursor: pointer; color: #0066cc; font-style: normal; }
+nav { margin-bottom: 20px; }
+footer { margin-top: 50px; padding-top: 20px; border-top: 1px solid #ccc; font-size: 0.9em; color: #666; }
+@media (max-width: 600px) { body { margin: 20px auto; font-size: 14px; } }
+</style>
+</head>
+<body>
+<nav><a href="index.html">← Back to Index</a></nav>
+<h1>Order Processing</h1>
+<h2 id="order-validation">Order Validation</h2>
+<ul>
+<li>Minimum order value is $10.00 <details class="src"><summary>[src]</summary>OrderService.php:6</details></li>
+<li>Maximum order value is $50,000.00 without manual approval <details class="src"><summary>[src]</summary>OrderService.php:7</details></li>
+<li>Orders over $1,000 require manager approval <details class="src"><summary>[src]</summary>OrderService.php:8</details></li>
+<li>See: <a href="topic-payment-processing.html#" class="unresolved" title="Unresolved reference">Payment Processing → </a></li>
+</ul>
+<h2 id="order-status-workflow">Order Status Workflow</h2>
+<ul>
+<li>New orders start in &quot;pending&quot; status <details class="src"><summary>[src]</summary>OrderService.php:15</details></li>
+<li>Orders move to &quot;processing&quot; after payment confirmation <details class="src"><summary>[src]</summary>OrderService.php:16</details></li>
+<li>Orders move to &quot;shipped&quot; when carrier picks up package <details class="src"><summary>[src]</summary>OrderService.php:17</details></li>
+<li>Orders move to &quot;delivered&quot; when customer confirms receipt <details class="src"><summary>[src]</summary>OrderService.php:18</details></li>
+<li>Customers can cancel orders only in &quot;pending&quot; status <details class="src"><summary>[src]</summary>OrderService.php:19</details></li>
+<li>Inventory is reserved for 15 minutes during checkout <details class="src"><summary>[src]</summary>OrderService.php:22</details></li>
+<li>If payment fails, inventory reservation is released <details class="src"><summary>[src]</summary>OrderService.php:23</details></li>
+</ul>
+<h2 id="fraud-detection">Fraud Detection</h2>
+<ul>
+<li>Orders with mismatched billing/shipping addresses are flagged <details class="src"><summary>[src]</summary>OrderService.php:28</details></li>
+<li>More than 3 orders from same IP in 1 hour triggers review <details class="src"><summary>[src]</summary>OrderService.php:29</details></li>
+<li>High-value orders to new customers require phone verification <details class="src"><summary>[src]</summary>OrderService.php:30</details></li>
+<li>See: <a href="topic-customer-accounts.html#account-verification">Customer Accounts → Account Verification</a></li>
+</ul>
+
+<footer>Generated on 2026-03-10 00:33:06</footer>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edge Case Testing - Test Documentation</title>
+<style>
+body { font-family: 'Courier New', monospace; max-width: 900px; margin: 40px auto; padding: 0 20px; background: #fafafa; color: #222; line-height: 1.6; }
+h1 { border-bottom: 2px solid #333; padding-bottom: 10px; }
+h2 { margin-top: 30px; color: #444; }
+ul { list-style: square; }
+li { margin: 8px 0; }
+a { color: #0066cc; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.unresolved { color: #cc0000; text-decoration: line-through; }
+details.src { display: inline; font-size: 0.85em; color: #666; font-style: italic; }
+summary { cursor: pointer; color: #0066cc; font-style: normal; }
+nav { margin-bottom: 20px; }
+footer { margin-top: 50px; padding-top: 20px; border-top: 1px solid #ccc; font-size: 0.9em; color: #666; }
+@media (max-width: 600px) { body { margin: 20px auto; font-size: 14px; } }
+</style>
+</head>
+<body>
+<nav><a href="index.html">← Back to Index</a></nav>
+<h1>Edge Case Testing</h1>
+<h2 id="multiple-tags">Multiple Tags</h2>
+<ul>
+<li>This tests the @bl-detail tag <details class="src"><summary>[src]</summary>EdgeCases.php:8</details></li>
+<li>This tests the @bl-details plural alias <details class="src"><summary>[src]</summary>EdgeCases.php:9</details></li>
+</ul>
+<h2 id="mixed-docblock">Mixed DocBlock</h2>
+<ul>
+<li>Only @bl-* tags should be extracted, not @param or @return <details class="src"><summary>[src]</summary>EdgeCases.php:17</details></li>
+<li>Multiple business logic details in one docblock <details class="src"><summary>[src]</summary>EdgeCases.php:19</details></li>
+<li>Inline comment with extra whitespace <details class="src"><summary>[src]</summary>EdgeCases.php:22</details></li>
+<li>Leading whitespace before tag <details class="src"><summary>[src]</summary>EdgeCases.php:23</details></li>
+</ul>
+<h2 id="unresolved-references">Unresolved References</h2>
+<ul>
+<li>See: <a href="topic-nonexistent-topic.html#" class="unresolved" title="Unresolved reference">Nonexistent Topic → </a></li>
+<li>See: <a href="topic-another-topic.html#nonexistent-subtopic" class="unresolved" title="Unresolved reference">Another Topic → Nonexistent Subtopic</a></li>
+<li>This subtopic has cross-references that won&#039;t resolve <details class="src"><summary>[src]</summary>EdgeCases.php:31</details></li>
+</ul>
+<h2 id="empty-values">Empty Values</h2>
+<ul>
+<li> <details class="src"><summary>[src]</summary>EdgeCases.php:40</details></li>
+<li>This is a valid detail after empty ones <details class="src"><summary>[src]</summary>EdgeCases.php:41</details></li>
+</ul>
+
+<footer>Generated on 2026-03-10 00:33:02</footer>
+</body>
+</html>

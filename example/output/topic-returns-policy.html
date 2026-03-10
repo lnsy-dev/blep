@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Returns Policy - E-Commerce Business Rules</title>
+<style>
+body { font-family: 'Courier New', monospace; max-width: 900px; margin: 40px auto; padding: 0 20px; background: #fafafa; color: #222; line-height: 1.6; }
+h1 { border-bottom: 2px solid #333; padding-bottom: 10px; }
+h2 { margin-top: 30px; color: #444; }
+ul { list-style: square; }
+li { margin: 8px 0; }
+a { color: #0066cc; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.unresolved { color: #cc0000; text-decoration: line-through; }
+details.src { display: inline; font-size: 0.85em; color: #666; font-style: italic; }
+summary { cursor: pointer; color: #0066cc; font-style: normal; }
+nav { margin-bottom: 20px; }
+footer { margin-top: 50px; padding-top: 20px; border-top: 1px solid #ccc; font-size: 0.9em; color: #666; }
+@media (max-width: 600px) { body { margin: 20px auto; font-size: 14px; } }
+</style>
+</head>
+<body>
+<nav><a href="index.html">← Back to Index</a></nav>
+<h1>Returns Policy</h1>
+<h2 id="return-window">Return Window</h2>
+<ul>
+<li>Standard return window is 30 days from delivery <details class="src"><summary>[src]</summary>ReturnProcessor.php:6</details></li>
+<li>Electronics have 14-day return window <details class="src"><summary>[src]</summary>ReturnProcessor.php:7</details></li>
+<li>Final sale items cannot be returned <details class="src"><summary>[src]</summary>ReturnProcessor.php:8</details></li>
+<li>Opened software/media cannot be returned unless defective <details class="src"><summary>[src]</summary>ReturnProcessor.php:9</details></li>
+</ul>
+<h2 id="return-shipping">Return Shipping</h2>
+<ul>
+<li>Customer pays return shipping unless item is defective <details class="src"><summary>[src]</summary>ReturnProcessor.php:15</details></li>
+<li>Defective items get prepaid return label <details class="src"><summary>[src]</summary>ReturnProcessor.php:16</details></li>
+<li>Return shipping cost is deducted from refund <details class="src"><summary>[src]</summary>ReturnProcessor.php:17</details></li>
+<li>See: <a href="topic-shipping.html#shipping-methods">Shipping → Shipping Methods</a></li>
+</ul>
+<h2 id="refund-processing">Refund Processing</h2>
+<ul>
+<li>Refunds issued to original payment method <details class="src"><summary>[src]</summary>ReturnProcessor.php:26</details></li>
+<li>Refunds processed within 5-7 business days of receiving return <details class="src"><summary>[src]</summary>ReturnProcessor.php:27</details></li>
+<li>Restocking fee of 15% for non-defective electronics <details class="src"><summary>[src]</summary>ReturnProcessor.php:28</details></li>
+<li>Store credit issued immediately, no restocking fee <details class="src"><summary>[src]</summary>ReturnProcessor.php:29</details></li>
+</ul>
+
+<footer>Generated on 2026-03-10 00:33:06</footer>
+</body>
+</html>

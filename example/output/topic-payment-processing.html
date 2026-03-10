@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Processing - E-Commerce Business Rules</title>
+<style>
+body { font-family: 'Courier New', monospace; max-width: 900px; margin: 40px auto; padding: 0 20px; background: #fafafa; color: #222; line-height: 1.6; }
+h1 { border-bottom: 2px solid #333; padding-bottom: 10px; }
+h2 { margin-top: 30px; color: #444; }
+ul { list-style: square; }
+li { margin: 8px 0; }
+a { color: #0066cc; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.unresolved { color: #cc0000; text-decoration: line-through; }
+details.src { display: inline; font-size: 0.85em; color: #666; font-style: italic; }
+summary { cursor: pointer; color: #0066cc; font-style: normal; }
+nav { margin-bottom: 20px; }
+footer { margin-top: 50px; padding-top: 20px; border-top: 1px solid #ccc; font-size: 0.9em; color: #666; }
+@media (max-width: 600px) { body { margin: 20px auto; font-size: 14px; } }
+</style>
+</head>
+<body>
+<nav><a href="index.html">← Back to Index</a></nav>
+<h1>Payment Processing</h1>
+<h2 id="accepted-payment-methods">Accepted Payment Methods</h2>
+<ul>
+<li>Credit cards: Visa, Mastercard, American Express, Discover <details class="src"><summary>[src]</summary>PaymentGateway.php:6</details></li>
+<li>Debit cards with Visa/Mastercard logo <details class="src"><summary>[src]</summary>PaymentGateway.php:7</details></li>
+<li>PayPal and Apple Pay accepted <details class="src"><summary>[src]</summary>PaymentGateway.php:8</details></li>
+<li>Gift cards can be combined with other payment methods <details class="src"><summary>[src]</summary>PaymentGateway.php:9</details></li>
+</ul>
+<h2 id="payment-security">Payment Security</h2>
+<ul>
+<li>All transactions use PCI-DSS compliant processing <details class="src"><summary>[src]</summary>PaymentGateway.php:15</details></li>
+<li>CVV required for all card transactions <details class="src"><summary>[src]</summary>PaymentGateway.php:16</details></li>
+<li>3D Secure verification for international cards <details class="src"><summary>[src]</summary>PaymentGateway.php:17</details></li>
+<li>Failed payment attempts are logged for fraud detection <details class="src"><summary>[src]</summary>PaymentGateway.php:18</details></li>
+<li>Card authorization holds funds for 7 days <details class="src"><summary>[src]</summary>PaymentGateway.php:21</details></li>
+<li>Capture happens when order ships <details class="src"><summary>[src]</summary>PaymentGateway.php:22</details></li>
+</ul>
+<h2 id="refunds-and-chargebacks">Refunds and Chargebacks</h2>
+<ul>
+<li>Refunds appear in 5-7 business days <details class="src"><summary>[src]</summary>PaymentGateway.php:27</details></li>
+<li>Partial refunds allowed for partial returns <details class="src"><summary>[src]</summary>PaymentGateway.php:28</details></li>
+<li>Chargebacks trigger account review <details class="src"><summary>[src]</summary>PaymentGateway.php:29</details></li>
+<li>More than 2 chargebacks result in payment method ban <details class="src"><summary>[src]</summary>PaymentGateway.php:30</details></li>
+</ul>
+
+<footer>Generated on 2026-03-10 00:33:06</footer>
+</body>
+</html>
