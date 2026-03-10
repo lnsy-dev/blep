@@ -50,11 +50,11 @@ class BLHtmlGenerator
 {$this->getStyles()}
 </head>
 <body>
-<nav><a href="search.html">🔍 Search</a> | <a href="changelog.html">📋 Changelog</a></nav>
+<nav><a href="search.html">search</a> | <a href="changelog.html">changelog</a></nav>
 <h1>{$this->siteTitle}</h1>
 <ul>
 $links</ul>
-<footer>Generated on {$this->timestamp}</footer>
+<footer>generated {$this->timestamp}</footer>
 </body>
 </html>
 HTML;
@@ -143,18 +143,13 @@ HTML;
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>$topic - {$this->siteTitle}</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" media="(prefers-color-scheme: light)">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/gruvbox-dark-hard.min.css" media="(prefers-color-scheme: dark)">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js"></script>
-<script>hljs.highlightAll();</script>
 {$this->getStyles()}
 </head>
 <body>
-<nav><a href="index.html">← Back to Index</a> | <a href="search.html">🔍 Search</a> | <a href="changelog.html">📋 Changelog</a></nav>
+<nav><a href="index.html">← index</a> | <a href="search.html">search</a> | <a href="changelog.html">changelog</a></nav>
 <h1>$topic</h1>
 $content
-<footer>Generated on {$this->timestamp}</footer>
+<footer>generated {$this->timestamp}</footer>
 </body>
 </html>
 HTML;
@@ -166,63 +161,37 @@ HTML;
     {
         return <<<CSS
 <style>
-:root {
-  color-scheme: light dark;
-}
-html { height: 100%; }
-body { font-family: 'Courier New', monospace; max-width: 900px; margin: 0 auto; padding: 0 20px; background: #fafafa; color: #222; line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
-body > *:not(footer) { flex-shrink: 0; }
-h1 { border-bottom: 2px solid #333; padding-bottom: 10px; }
-h2 { margin-top: 30px; color: #444; }
-ul { list-style: square; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Courier New', monospace; line-height: 1.6; color: #000; background: #fff; max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { font-size: 1.5rem; margin-bottom: 20px; font-weight: normal; border-bottom: 2px solid #000; padding-bottom: 10px; }
+h2 { font-size: 1.2rem; margin: 30px 0 10px 0; font-weight: normal; border-bottom: 1px solid #000; padding-bottom: 5px; }
+ul { list-style: none; padding-left: 20px; }
 li { margin: 8px 0; }
-a { color: #0066cc; text-decoration: none; }
-a:hover { text-decoration: underline; }
-.unresolved { color: #cc0000; text-decoration: line-through; }
-.src-location { font-size: 0.85em; color: #666; font-style: italic; margin: 8px 0; }
-.subtitle { font-size: 0.95em; color: #666; margin-top: -10px; }
-details.code-block { margin: 16px 0; }
-details.code-block summary { cursor: pointer; color: #0066cc; font-weight: bold; }
-details.history-block { margin: 12px 0; font-size: 0.9em; }
-details.history-block summary { cursor: pointer; color: #0066cc; }
-details.history-block ul { margin: 8px 0; }
-details.history-block li { font-size: 0.9em; margin: 4px 0; }
+li::before { content: "- "; }
+a { color: #000; text-decoration: underline; }
+a:hover { background: #000; color: #fff; }
+.unresolved { text-decoration: line-through; }
+.src-location { font-size: 0.9em; margin: 8px 0; }
+.subtitle { font-size: 0.9em; margin-top: -10px; margin-bottom: 20px; }
+details { margin: 10px 0; }
+details summary { cursor: pointer; text-decoration: underline; }
+details.code-block { border: 1px solid #000; padding: 10px; margin: 15px 0; }
+details.history-block { border: 1px solid #000; padding: 10px; margin: 10px 0; font-size: 0.9em; }
+details.history-block ul { padding-left: 0; }
+details.history-block li::before { content: ""; }
 details.rationale-block { display: inline-block; margin-left: 8px; font-size: 0.9em; }
-details.rationale-block summary { cursor: pointer; color: #0066cc; font-style: italic; }
-details.rationale-block p { margin: 4px 0; padding: 8px; background: #f0f0f0; border-left: 3px solid #0066cc; }
-pre { background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px; padding: 16px; overflow-x: auto; margin: 8px 0; }
-code { font-family: 'Courier New', Consolas, monospace; font-size: 0.9em; }
-nav { margin-bottom: 20px; }
-footer { margin-top: auto; padding: 20px 0; border-top: 1px solid #ccc; font-size: 0.9em; color: #666; }
-.changelog-item { border-left: 3px solid #0066cc; padding-left: 16px; margin-bottom: 24px; }
-.changelog-meta { font-size: 0.85em; color: #666; margin-bottom: 4px; }
-.changelog-date { font-weight: bold; margin-right: 12px; }
-.changelog-hash { font-family: monospace; background: #f0f0f0; padding: 2px 6px; border-radius: 3px; margin-right: 12px; }
-.changelog-author { font-style: italic; }
-.changelog-topic { font-weight: bold; margin: 4px 0; }
-.changelog-detail { margin: 4px 0; }
-.changelog-message { font-size: 0.9em; color: #666; font-style: italic; margin-top: 4px; }
-@media (prefers-color-scheme: dark) {
-  body { background: #282828; color: #ebdbb2; }
-  h1 { border-bottom-color: #a89984; }
-  h2 { color: #d5c4a1; }
-  a { color: #83a598; }
-  .unresolved { color: #fb4934; }
-  .src-location { color: #928374; }
-  .subtitle { color: #928374; }
-  details.code-block summary { color: #83a598; }
-  details.history-block summary { color: #83a598; }
-  details.rationale-block summary { color: #83a598; }
-  details.rationale-block p { background: #3c3836; border-left-color: #83a598; }
-  pre { background: #3c3836; border-color: #504945; color: #ebdbb2; }
-  code { color: #ebdbb2; }
-  footer { border-top-color: #504945; color: #928374; }
-  .changelog-item { border-left-color: #83a598; }
-  .changelog-meta { color: #928374; }
-  .changelog-hash { background: #3c3836; color: #ebdbb2; }
-  .changelog-message { color: #928374; }
-}
-@media (max-width: 600px) { body { margin: 20px auto; font-size: 14px; } }
+details.rationale-block p { margin: 8px 0; padding: 8px; border: 1px solid #000; }
+pre { background: #f5f5f5; border: 1px solid #000; padding: 15px; overflow-x: auto; margin: 10px 0; }
+code { font-family: 'Courier New', monospace; }
+nav { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #000; }
+footer { margin-top: 40px; padding-top: 20px; border-top: 2px solid #000; }
+.changelog-item { border-left: 2px solid #000; padding-left: 15px; margin-bottom: 30px; }
+.changelog-meta { font-size: 0.9em; margin-bottom: 5px; }
+.changelog-date { margin-right: 10px; }
+.changelog-hash { margin-right: 10px; }
+.changelog-topic { margin: 5px 0; }
+.changelog-detail { margin: 5px 0; }
+.changelog-message { font-size: 0.9em; margin-top: 5px; }
 </style>
 CSS;
     }
@@ -296,11 +265,11 @@ ITEM;
 {$this->getStyles()}
 </head>
 <body>
-<nav><a href="index.html">← Back to Index</a> | <a href="search.html">🔍 Search</a></nav>
-<h1>Changelog</h1>
-<p class="subtitle">Recent changes to business logic documentation</p>
+<nav><a href="index.html">← index</a> | <a href="search.html">search</a></nav>
+<h1>changelog</h1>
+<p class="subtitle">recent changes to business logic documentation</p>
 $content
-<footer>Generated on {$this->timestamp}</footer>
+<footer>generated {$this->timestamp}</footer>
 </body>
 </html>
 HTML;
@@ -319,53 +288,32 @@ HTML;
 <title>Search - Business Logic Documentation</title>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
 <style>
-:root { color-scheme: light dark; }
-html { height: 100%; }
-body { font-family: 'Courier New', monospace; max-width: 900px; margin: 0 auto; padding: 0 20px; background: #fafafa; color: #222; line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
-body > *:not(footer) { flex-shrink: 0; }
-h1 { border-bottom: 2px solid #333; padding-bottom: 10px; }
-nav { margin-bottom: 20px; }
-a { color: #0066cc; text-decoration: none; }
-a:hover { text-decoration: underline; }
-footer { margin-top: auto; padding: 20px 0; border-top: 1px solid #ccc; font-size: 0.9em; color: #666; }
-
-#search-input { width: 100%; padding: 12px; font-size: 16px; font-family: 'Courier New', monospace; border: 2px solid #333; border-radius: 4px; margin-bottom: 20px; }
-#search-input:focus { outline: none; border-color: #0066cc; }
-
-.search-card { border: 1px solid #d0d7de; border-radius: 6px; padding: 16px; margin-bottom: 16px; background: #fff; }
-.search-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-.topic-badge { display: inline-block; background: #0066cc; color: #fff; padding: 2px 8px; border-radius: 3px; font-size: 0.85em; margin-right: 8px; }
-.subtopic-title { font-weight: bold; font-size: 1.1em; margin: 8px 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Courier New', monospace; line-height: 1.6; color: #000; background: #fff; max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { font-size: 1.5rem; margin-bottom: 20px; font-weight: normal; border-bottom: 2px solid #000; padding-bottom: 10px; }
+nav { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #000; }
+a { color: #000; text-decoration: underline; }
+a:hover { background: #000; color: #fff; }
+footer { margin-top: 40px; padding-top: 20px; border-top: 2px solid #000; }
+#search-input { width: 100%; padding: 10px; font-size: 1rem; font-family: 'Courier New', monospace; border: 2px solid #000; margin-bottom: 20px; }
+#search-input:focus { outline: none; }
+.search-card { border: 1px solid #000; padding: 15px; margin-bottom: 15px; }
+.topic-badge { display: inline-block; background: #000; color: #fff; padding: 2px 8px; margin-right: 8px; }
+.subtopic-title { margin: 8px 0; }
 .detail-text { margin: 8px 0; }
-.code-preview { background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 4px; padding: 8px; margin: 8px 0; font-size: 0.85em; overflow-x: auto; max-height: 150px; overflow-y: auto; }
-.meta-info { font-size: 0.85em; color: #666; margin-top: 8px; }
-.view-link { display: inline-block; margin-top: 8px; color: #0066cc; font-weight: bold; }
-.empty-state { text-align: center; padding: 40px; color: #666; }
-mark { background: #ffeb3b; padding: 2px 4px; border-radius: 2px; }
-
-@media (prefers-color-scheme: dark) {
-  body { background: #282828; color: #ebdbb2; }
-  h1 { border-bottom-color: #a89984; }
-  a { color: #83a598; }
-  footer { border-top-color: #504945; color: #928374; }
-  #search-input { background: #3c3836; border-color: #a89984; color: #ebdbb2; }
-  .search-card { background: #3c3836; border-color: #504945; }
-  .search-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
-  .topic-badge { background: #83a598; color: #282828; }
-  .code-preview { background: #282828; border-color: #504945; color: #ebdbb2; }
-  .meta-info { color: #928374; }
-  .view-link { color: #83a598; }
-  .empty-state { color: #928374; }
-  mark { background: #d79921; color: #282828; }
-}
+.code-preview { background: #f5f5f5; border: 1px solid #000; padding: 10px; margin: 8px 0; font-size: 0.9em; overflow-x: auto; max-height: 150px; overflow-y: auto; }
+.meta-info { font-size: 0.9em; margin-top: 8px; }
+.view-link { display: inline-block; margin-top: 8px; }
+.empty-state { text-align: center; padding: 40px; }
+mark { background: #000; color: #fff; padding: 2px 4px; }
 </style>
 </head>
 <body>
-<nav><a href="index.html">← Back to Index</a> | <a href="changelog.html">📋 Changelog</a></nav>
-<h1>Search Documentation</h1>
-<input type="text" id="search-input" placeholder="Search topics, details, code, authors... (Press / to focus)" autofocus>
+<nav><a href="index.html">← index</a> | <a href="changelog.html">changelog</a></nav>
+<h1>search documentation</h1>
+<input type="text" id="search-input" placeholder="search topics, details, code, authors... (press / to focus)" autofocus>
 <div id="results"></div>
-<footer>Powered by Fuse.js</footer>
+<footer>powered by fuse.js</footer>
 
 <script>
 let fuse;
@@ -406,7 +354,7 @@ searchInput.addEventListener('input', (e) => {
   const results = fuse.search(query).slice(0, 20);
   
   if (results.length === 0) {
-    resultsDiv.innerHTML = '<div class="empty-state">No results found. Try different keywords.</div>';
+    resultsDiv.innerHTML = '<div class="empty-state">no results found. try different keywords.</div>';
     return;
   }
 
@@ -417,7 +365,6 @@ searchInput.addEventListener('input', (e) => {
     let detailText = item.detail;
     let codePreview = item.code ? item.code.split('\n').slice(0, 5).join('\n') : '';
     
-    // Highlight matches
     if (result.matches) {
       result.matches.forEach(match => {
         if (match.key === 'detail') {
@@ -433,10 +380,10 @@ searchInput.addEventListener('input', (e) => {
           <span class="subtopic-title">${escapeHtml(item.subtopic)}</span>
         </div>
         <div class="detail-text">${detailText}</div>
-        ${item.rationale ? `<div class="meta-info"><strong>Why:</strong> ${escapeHtml(item.rationale)}</div>` : ''}
+        ${item.rationale ? `<div class="meta-info">why: ${escapeHtml(item.rationale)}</div>` : ''}
         ${codePreview ? `<div class="code-preview">${escapeHtml(codePreview)}</div>` : ''}
         <div class="meta-info">${item.file}:${item.line}${item.author ? ` • ${escapeHtml(item.author)}` : ''}</div>
-        <a href="${link}" class="view-link">View in context →</a>
+        <a href="${link}" class="view-link">view in context →</a>
       </div>
     `;
   }).join('');
@@ -462,7 +409,6 @@ function highlightMatches(text, indices) {
   return result;
 }
 
-// Keyboard shortcut
 document.addEventListener('keydown', (e) => {
   if (e.key === '/' && document.activeElement !== searchInput) {
     e.preventDefault();
