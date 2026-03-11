@@ -46,9 +46,11 @@
             <h1>blep</h1>
             <p class="tagline">business logic documentation generator</p>
             <div class="install">
+                <strong>Quick Install:</strong>
                 <pre>curl -O https://github.com/lnsy-dev/blep/releases/latest/download/blep
 chmod +x blep
 ./blep src/</pre>
+                <p style="margin-top: 10px; font-size: 0.9em;">Requires PHP 7.4+</p>
             </div>
         </div>
     </header>
@@ -195,21 +197,46 @@ public function createOrder($amount) {
 
     <section class="section">
         <div class="container">
+            <h2>requirements</h2>
+            <ul class="feature-list">
+                <li>PHP 7.4 or higher</li>
+                <li>No PHP extensions required beyond standard installation</li>
+                <li>Git (optional, for change history tracking)</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
             <h2>installation</h2>
             <div class="feature">
-                <h3>composer (recommended)</h3>
-                <pre>composer global require blep/blep</pre>
-            </div>
-            <div class="feature">
-                <h3>single-file download</h3>
+                <h3>option 1: single-file download (recommended)</h3>
+                <p>Download the standalone executable - no dependencies needed:</p>
                 <pre>curl -O https://github.com/lnsy-dev/blep/releases/latest/download/blep
-chmod +x blep</pre>
+chmod +x blep
+./blep --version</pre>
             </div>
             <div class="feature">
-                <h3>from source</h3>
+                <h3>option 2: composer global install</h3>
+                <p>Install globally via Composer:</p>
+                <pre>composer global require blep/blep
+blep --version</pre>
+                <p>Make sure <code>~/.composer/vendor/bin</code> is in your PATH.</p>
+            </div>
+            <div class="feature">
+                <h3>option 3: composer project dependency</h3>
+                <p>Add to your project's composer.json:</p>
+                <pre>composer require blep/blep
+./vendor/bin/blep --version</pre>
+            </div>
+            <div class="feature">
+                <h3>option 4: build from source</h3>
+                <p>Clone and build the phar file yourself:</p>
                 <pre>git clone https://github.com/lnsy-dev/blep.git
 cd blep
-./build.sh</pre>
+composer install
+composer run build
+./build/blep --version</pre>
             </div>
         </div>
     </section>

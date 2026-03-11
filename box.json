@@ -1,6 +1,6 @@
 {
-    "main": "bin/bldoc",
-    "output": "build/bldoc",
+    "main": "bin/blep",
+    "output": "build/blep",
     "chmod": "0755",
     "directories": [
         "src"
