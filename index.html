@@ -47,7 +47,7 @@
             <p class="tagline">business logic documentation generator</p>
             <div class="install">
                 <strong>Quick Install:</strong>
-                <pre>curl -O https://github.com/lnsy-dev/blep/releases/latest/download/blep
+                <pre>curl -O https://github.com/lnsy-dev/blep/releases/download/v1.0.0/blep
 chmod +x blep
 ./blep src/</pre>
                 <p style="margin-top: 10px; font-size: 0.9em;">Requires PHP 7.4+</p>
@@ -248,21 +248,21 @@ public function createOrder($amount) {
             <div class="feature">
                 <h3>option 1: single-file download (recommended)</h3>
                 <p>Download the standalone executable - no dependencies needed:</p>
-                <pre>curl -O https://github.com/lnsy-dev/blep/releases/latest/download/blep
+                <pre>curl -O https://github.com/lnsy-dev/blep/releases/download/v1.0.0/blep
 chmod +x blep
 ./blep --version</pre>
             </div>
             <div class="feature">
                 <h3>option 2: composer global install</h3>
                 <p>Install globally via Composer:</p>
-                <pre>composer global require blep/blep
+                <pre>composer global require lnsy-dev/blep
 blep --version</pre>
                 <p>Make sure <code>~/.composer/vendor/bin</code> is in your PATH.</p>
             </div>
             <div class="feature">
                 <h3>option 3: composer project dependency</h3>
                 <p>Add to your project's composer.json:</p>
-                <pre>composer require blep/blep
+                <pre>composer require lnsy-dev/blep
 ./vendor/bin/blep --version</pre>
             </div>
             <div class="feature">
