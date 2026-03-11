@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Processing - Blep Demo - E-Commerce Business Rules</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { height: 100%; }
+body { font-family: 'Courier New', monospace; line-height: 1.6; color: #000; background: #fff; max-width: 900px; margin: 0 auto; padding: 20px; min-height: 100vh; display: flex; flex-direction: column; }
+body > *:not(footer) { flex-shrink: 0; }
+h1 { font-size: 1.5rem; margin-bottom: 20px; font-weight: normal; border-bottom: 2px solid #ccc; padding-bottom: 10px; }
+h2 { font-size: 1.2rem; margin: 30px 0 10px 0; font-weight: normal; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+ul { list-style: none; padding-left: 20px; }
+li { margin: 8px 0; }
+li::before { content: "- "; }
+a { color: #000; text-decoration: underline; }
+a:hover { background: #000; color: #fff; }
+.unresolved { text-decoration: line-through; }
+.src-location { font-size: 0.9em; margin: 8px 0; }
+.subtitle { font-size: 0.9em; margin-top: -10px; margin-bottom: 20px; }
+details { margin: 10px 0; }
+details summary { cursor: pointer; text-decoration: underline; }
+details.code-block { border: 1px solid #ccc; padding: 10px; margin: 15px 0; }
+details.history-block { border: 1px solid #ccc; padding: 10px; margin: 10px 0; font-size: 0.9em; }
+details.history-block ul { padding-left: 0; }
+details.history-block li::before { content: ""; }
+details.rationale-block { display: inline-block; margin-left: 8px; font-size: 0.9em; }
+details.rationale-block p { margin: 8px 0; padding: 8px; border: 1px solid #ccc; }
+pre { background: #f5f5f5; border: 1px solid #ccc; padding: 15px; overflow-x: auto; margin: 10px 0; }
+code { font-family: 'Courier New', monospace; }
+nav { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #ccc; }
+footer { margin-top: auto; padding-top: 20px; border-top: 2px solid #ccc; }
+.changelog-item { border-left: 2px solid #ccc; padding-left: 15px; margin-bottom: 30px; }
+.changelog-meta { font-size: 0.9em; margin-bottom: 5px; }
+.changelog-date { margin-right: 10px; }
+.changelog-hash { margin-right: 10px; }
+.changelog-topic { margin: 5px 0; }
+.changelog-detail { margin: 5px 0; }
+.changelog-message { font-size: 0.9em; margin-top: 5px; }
+</style>
+</head>
+<body>
+<nav><a href="index.html">← index</a> | <a href="search.html">search</a> | <a href="changelog.html">changelog</a></nav>
+<h1>Payment Processing</h1>
+<h2 id="accepted-payment-methods">Accepted Payment Methods</h2>
+<p class="src-location">PaymentGateway.php:6 — last updated 2026-03-10 01:25 by lnsy</p>
+<details class="history-block"><summary>Recent Changes</summary><ul><li><code>5b7fa60</code> 2026-03-10 01:25 by lnsy — initial commit</li>
+</ul></details>
+<ul>
+<li>Credit cards: Visa, Mastercard, American Express, Discover</li>
+<li>Debit cards with Visa/Mastercard logo</li>
+<li>PayPal and Apple Pay accepted</li>
+<li>Gift cards can be combined with other payment methods</li>
+</ul>
+<details class="code-block"><summary>code</summary><pre><code class="language-php">class PaymentGateway {
+    
+    /**
+     * @bl-subtopic Payment Security
+     * @bl-detail All transactions use PCI-DSS compliant processing
+     * @bl-detail CVV required for all card transactions
+     * @bl-detail 3D Secure verification for international cards
+     * @bl-detail Failed payment attempts are logged for fraud detection
+     */
+    public function processPayment($order, $paymentMethod) {
+        // @bl-detail Card authorization holds funds for 7 days
+        // @bl-detail Capture happens when order ships
+    }
+    
+    /**
+     * @bl-subtopic Refunds and Chargebacks
+     * @bl-detail Refunds appear in 5-7 business days
+     * @bl-detail Partial refunds allowed for partial returns
+     * @bl-detail Chargebacks trigger account review
+     * @bl-detail More than 2 chargebacks result in payment method ban
+     */
+    public function processRefund($transaction) {
+        // Implementation
+    }
+}</code></pre></details>
+<h2 id="payment-security">Payment Security</h2>
+<p class="src-location">PaymentGateway.php:15 — last updated 2026-03-10 01:25 by lnsy</p>
+<details class="history-block"><summary>Recent Changes</summary><ul><li><code>5b7fa60</code> 2026-03-10 01:25 by lnsy — initial commit</li>
+</ul></details>
+<ul>
+<li>All transactions use PCI-DSS compliant processing</li>
+<li>CVV required for all card transactions</li>
+<li>3D Secure verification for international cards</li>
+<li>Failed payment attempts are logged for fraud detection</li>
+<li>Card authorization holds funds for 7 days</li>
+<li>Capture happens when order ships</li>
+</ul>
+<details class="code-block"><summary>code</summary><pre><code class="language-php">    public function processPayment($order, $paymentMethod) {
+        // @bl-detail Card authorization holds funds for 7 days
+        // @bl-detail Capture happens when order ships
+    }</code></pre></details>
+<h2 id="refunds-and-chargebacks">Refunds and Chargebacks</h2>
+<p class="src-location">PaymentGateway.php:27 — last updated 2026-03-10 01:25 by lnsy</p>
+<details class="history-block"><summary>Recent Changes</summary><ul><li><code>5b7fa60</code> 2026-03-10 01:25 by lnsy — initial commit</li>
+</ul></details>
+<ul>
+<li>Refunds appear in 5-7 business days</li>
+<li>Partial refunds allowed for partial returns</li>
+<li>Chargebacks trigger account review</li>
+<li>More than 2 chargebacks result in payment method ban</li>
+</ul>
+<details class="code-block"><summary>code</summary><pre><code class="language-php">    public function processRefund($transaction) {
+        // Implementation
+    }</code></pre></details>
+<h2 id="refund-rules">Refund Rules</h2>
+<p class="src-location">RefundService.php:7 — last updated 2026-03-10 02:29 by lnsy</p>
+<details class="history-block"><summary>Recent Changes</summary><ul><li><code>958e5cb</code> 2026-03-10 02:29 by lnsy — updated AGENTS.md</li>
+</ul></details>
+<ul>
+<li>Full refunds available within 30 days of purchase<details class="rationale-block"><summary>Why?</summary><p>We allow full refunds within 30 days to build customer trust and reduce disputes</p></details></li>
+<li>Partial refunds require manager approval</li>
+<li>Refunds to original payment method only<details class="rationale-block"><summary>Why?</summary><p>Partial refunds are complex and can be abused, so we require oversight</p></details></li>
+</ul>
+<details class="code-block"><summary>code</summary><pre><code class="language-php">class RefundService {
+    
+    /**
+     * @bl-subtopic Fraud Prevention
+     * @bl-rationale Multiple refund requests from the same customer often indicate fraud or abuse
+     * @bl-detail More than 3 refunds in 6 months triggers account review
+     * @bl-detail Refunds over $500 require identity verification
+     */
+    public function processRefund($order) {
+        // Implementation
+    }
+}</code></pre></details>
+<h2 id="fraud-prevention">Fraud Prevention</h2>
+<p class="src-location">RefundService.php:17 — last updated 2026-03-10 02:29 by lnsy</p>
+<details class="history-block"><summary>Recent Changes</summary><ul><li><code>958e5cb</code> 2026-03-10 02:29 by lnsy — updated AGENTS.md</li>
+</ul></details>
+<ul>
+<li>More than 3 refunds in 6 months triggers account review<details class="rationale-block"><summary>Why?</summary><p>Multiple refund requests from the same customer often indicate fraud or abuse</p></details></li>
+<li>Refunds over $500 require identity verification</li>
+</ul>
+<details class="code-block"><summary>code</summary><pre><code class="language-php">    public function processRefund($order) {
+        // Implementation
+    }</code></pre></details>
+
+<footer>generated 2026-03-11 19:23:15</footer>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Processing - Blep Demo - E-Commerce Business Rules</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { height: 100%; }
+body { font-family: 'Courier New', monospace; line-height: 1.6; color: #000; background: #fff; max-width: 900px; margin: 0 auto; padding: 20px; min-height: 100vh; display: flex; flex-direction: column; }
+body > *:not(footer) { flex-shrink: 0; }
+h1 { font-size: 1.5rem; margin-bottom: 20px; font-weight: normal; border-bottom: 2px solid #ccc; padding-bottom: 10px; }
+h2 { font-size: 1.2rem; margin: 30px 0 10px 0; font-weight: normal; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+ul { list-style: none; padding-left: 20px; }
+li { margin: 8px 0; }
+li::before { content: "- "; }
+a { color: #000; text-decoration: underline; }
+a:hover { background: #000; color: #fff; }
+.unresolved { text-decoration: line-through; }
+.src-location { font-size: 0.9em; margin: 8px 0; }
+.subtitle { font-size: 0.9em; margin-top: -10px; margin-bottom: 20px; }
+details { margin: 10px 0; }
+details summary { cursor: pointer; text-decoration: underline; }
+details.code-block { border: 1px solid #ccc; padding: 10px; margin: 15px 0; }
+details.history-block { border: 1px solid #ccc; padding: 10px; margin: 10px 0; font-size: 0.9em; }
+details.history-block ul { padding-left: 0; }
+details.history-block li::before { content: ""; }
+details.rationale-block { display: inline-block; margin-left: 8px; font-size: 0.9em; }
+details.rationale-block p { margin: 8px 0; padding: 8px; border: 1px solid #ccc; }
+pre { background: #f5f5f5; border: 1px solid #ccc; padding: 15px; overflow-x: auto; margin: 10px 0; }
+code { font-family: 'Courier New', monospace; }
+nav { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #ccc; }
+footer { margin-top: auto; padding-top: 20px; border-top: 2px solid #ccc; }
+.changelog-item { border-left: 2px solid #ccc; padding-left: 15px; margin-bottom: 30px; }
+.changelog-meta { font-size: 0.9em; margin-bottom: 5px; }
+.changelog-date { margin-right: 10px; }
+.changelog-hash { margin-right: 10px; }
+.changelog-topic { margin: 5px 0; }
+.changelog-detail { margin: 5px 0; }
+.changelog-message { font-size: 0.9em; margin-top: 5px; }
+</style>
+</head>
+<body>
+<nav><a href="index.html">← index</a> | <a href="search.html">search</a> | <a href="changelog.html">changelog</a></nav>
+<h1>Order Processing</h1>
+<h2 id="order-validation">Order Validation</h2>
+<p class="src-location">OrderService.php:6 — last updated 2026-03-10 01:25 by lnsy</p>
+<details class="history-block"><summary>Recent Changes</summary><ul><li><code>5b7fa60</code> 2026-03-10 01:25 by lnsy — initial commit</li>
+</ul></details>
+<ul>
+<li>Minimum order value is $10.00</li>
+<li>Maximum order value is $50,000.00 without manual approval</li>
+<li>Orders over $1,000 require manager approval</li>
+<li>See: <a href="topic-payment-processing.html#" class="unresolved" title="Unresolved reference">Payment Processing → </a></li>
+</ul>
+<details class="code-block"><summary>code</summary><pre><code class="language-php">class OrderService {
+    
+    /**
+     * @bl-subtopic Order Status Workflow
+     * @bl-detail New orders start in &quot;pending&quot; status
+     * @bl-detail Orders move to &quot;processing&quot; after payment confirmation
+     * @bl-detail Orders move to &quot;shipped&quot; when carrier picks up package
+     * @bl-detail Orders move to &quot;delivered&quot; when customer confirms receipt
+     * @bl-detail Customers can cancel orders only in &quot;pending&quot; status
+     */
+    public function processOrder($order) {
+        // @bl-detail Inventory is reserved for 15 minutes during checkout
+        // @bl-detail If payment fails, inventory reservation is released
+    }
+    
+    /**
+     * @bl-subtopic Fraud Detection
+     * @bl-detail Orders with mismatched billing/shipping addresses are flagged
+     * @bl-detail More than 3 orders from same IP in 1 hour triggers review
+     * @bl-detail High-value orders to new customers require phone verification
+     * @bl-see Customer Accounts: Account Verification
+     */
+    public function checkFraud($order) {
+        // Implementation
+    }
+}</code></pre></details>
+<h2 id="order-status-workflow">Order Status Workflow</h2>
+<p class="src-location">OrderService.php:15 — last updated 2026-03-10 01:25 by lnsy</p>
+<details class="history-block"><summary>Recent Changes</summary><ul><li><code>5b7fa60</code> 2026-03-10 01:25 by lnsy — initial commit</li>
+</ul></details>
+<ul>
+<li>New orders start in &quot;pending&quot; status</li>
+<li>Orders move to &quot;processing&quot; after payment confirmation</li>
+<li>Orders move to &quot;shipped&quot; when carrier picks up package</li>
+<li>Orders move to &quot;delivered&quot; when customer confirms receipt</li>
+<li>Customers can cancel orders only in &quot;pending&quot; status</li>
+<li>Inventory is reserved for 15 minutes during checkout</li>
+<li>If payment fails, inventory reservation is released</li>
+</ul>
+<details class="code-block"><summary>code</summary><pre><code class="language-php">    public function processOrder($order) {
+        // @bl-detail Inventory is reserved for 15 minutes during checkout
+        // @bl-detail If payment fails, inventory reservation is released
+    }</code></pre></details>
+<h2 id="fraud-detection">Fraud Detection</h2>
+<p class="src-location">OrderService.php:28 — last updated 2026-03-10 01:25 by lnsy</p>
+<details class="history-block"><summary>Recent Changes</summary><ul><li><code>5b7fa60</code> 2026-03-10 01:25 by lnsy — initial commit</li>
+</ul></details>
+<ul>
+<li>Orders with mismatched billing/shipping addresses are flagged</li>
+<li>More than 3 orders from same IP in 1 hour triggers review</li>
+<li>High-value orders to new customers require phone verification</li>
+<li>See: <a href="topic-customer-accounts.html#account-verification">Customer Accounts → Account Verification</a></li>
+</ul>
+<details class="code-block"><summary>code</summary><pre><code class="language-php">    public function checkFraud($order) {
+        // Implementation
+    }</code></pre></details>
+
+<footer>generated 2026-03-11 19:23:15</footer>
+</body>
+</html>
