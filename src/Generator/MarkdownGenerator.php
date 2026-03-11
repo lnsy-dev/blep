@@ -1,6 +1,8 @@
 <?php
 
-class BLMarkdownGenerator
+namespace Blep\Generator;
+
+class MarkdownGenerator
 {
     private array $data;
     private string $outputDir;

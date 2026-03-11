@@ -27,10 +27,16 @@ Document your application's business rules, workflows, and domain logic directly
 ### Option 1: Composer (Recommended)
 
 ```bash
+composer require blep/blep
+```
+
+Or install globally:
+
+```bash
 composer global require blep/blep
 ```
 
-### Option 2: Single-file download
+### Option 2: Single-file phar download
 
 ```bash
 curl -O https://github.com/yourusername/blep/releases/latest/download/bldoc
@@ -42,7 +48,8 @@ chmod +x bldoc
 ```bash
 git clone https://github.com/yourusername/blep.git
 cd blep
-./build.sh  # Creates single-file 'bldoc'
+composer install
+composer build  # Creates single-file phar in build/
 ```
 
 ## Quick Start
@@ -57,7 +64,7 @@ cd blep
 
 2. **Generate documentation:**
    ```bash
-   ./bldoc src/
+   ./vendor/bin/bldoc src/
    ```
 
 3. **Browse your docs:**
@@ -70,23 +77,20 @@ cd blep
 ### Basic
 
 ```bash
-php bl-doc-gen.php src/
+bldoc src/
 ```
 
 ### With options
 
 ```bash
 # Custom output directory and title
-php bl-doc-gen.php -o docs/ -t "My Project Docs" src/
+bldoc -o docs/ -t "My Project Docs" src/
 
 # Exclude directories
-php bl-doc-gen.php --exclude vendor/ --exclude tests/ .
+bldoc --exclude vendor/ --exclude tests/ .
 
 # Verbose output
-php bl-doc-gen.php -v src/ lib/
-
-# Using single-file version
-./bldoc src/
+bldoc -v src/ lib/
 ```
 
 ### Command-line options
@@ -196,22 +200,34 @@ Each detail includes:
 
 ## Development
 
+### Setup
+
+```bash
+git clone https://github.com/yourusername/blep.git
+cd blep
+composer install
+```
+
 ### Building
 
 ```bash
-./build.sh
+composer build
+# or
+./vendor/bin/box compile
 ```
 
-Creates `bldoc` — a single-file version with all classes bundled.
+Creates `build/bldoc` — a single-file phar executable.
 
 ### Testing
 
 ```bash
-# Test on example project
-php bl-doc-gen.php -v example/src/
-
 # Run test suite
-php tests/run-tests.php
+composer test
+# or
+./vendor/bin/pest
+
+# Test on example project
+./bin/bldoc -v example/src/
 ```
 
 ## Contributing

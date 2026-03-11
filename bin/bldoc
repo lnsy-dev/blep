@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+<?php
+
+// Autoloader detection
+$autoloadPaths = [
+    __DIR__ . '/../vendor/autoload.php',  // Installed as dependency
+    __DIR__ . '/../../../autoload.php',   // Installed globally via Composer
+];
+
+$autoloaderFound = false;
+foreach ($autoloadPaths as $autoloadPath) {
+    if (file_exists($autoloadPath)) {
+        require_once $autoloadPath;
+        $autoloaderFound = true;
+        break;
+    }
+}
+
+if (!$autoloaderFound) {
+    fwrite(STDERR, "Error: Composer autoloader not found. Run 'composer install' first.\n");
+    exit(1);
+}
+
+use Blep\Command\GenerateCommand;
+
+$command = new GenerateCommand();
+exit($command->run($argv));

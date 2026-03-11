@@ -1,6 +1,8 @@
 <?php
 
-class BLSearchIndexGenerator
+namespace Blep\Generator;
+
+class SearchIndexGenerator
 {
     private array $data;
     private string $outputDir;

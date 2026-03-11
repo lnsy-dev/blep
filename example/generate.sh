@@ -9,7 +9,7 @@ echo "Generating business logic documentation..."
 echo ""
 
 # Run the generator
-php "$SCRIPT_DIR/../bl-doc-gen.php" -o "$OUTPUT_DIR" -t "E-Commerce Business Rules" "$SCRIPT_DIR/src/"
+"$SCRIPT_DIR/../bin/bldoc" -o "$OUTPUT_DIR" -t "E-Commerce Business Rules" "$SCRIPT_DIR/src/"
 
 if [ $? -eq 0 ]; then
     echo ""

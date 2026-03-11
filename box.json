@@ -1,0 +1,23 @@
+{
+    "main": "bin/bldoc",
+    "output": "build/bldoc",
+    "chmod": "0755",
+    "directories": [
+        "src"
+    ],
+    "files": [
+        "LICENSE"
+    ],
+    "finder": [
+        {
+            "name": "*.php",
+            "in": "src",
+            "exclude": []
+        }
+    ],
+    "compression": "GZ",
+    "compactors": [
+        "KevinGH\\Box\\Compactor\\Php"
+    ],
+    "stub": true
+}

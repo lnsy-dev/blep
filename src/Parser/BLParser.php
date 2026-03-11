@@ -1,5 +1,7 @@
 <?php
 
+namespace Blep\Parser;
+
 class BLParser
 {
     private array $data = [];
@@ -115,8 +117,8 @@ class BLParser
         }
 
         $iterator = $recursive 
-            ? new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dirPath))
-            : new DirectoryIterator($dirPath);
+            ? new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dirPath))
+            : new \DirectoryIterator($dirPath);
 
         foreach ($iterator as $file) {
             if ($file->isFile() && $file->getExtension() === 'php') {

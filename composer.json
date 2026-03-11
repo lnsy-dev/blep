@@ -7,16 +7,31 @@
     "require": {
         "php": ">=7.4"
     },
-    "bin": {
-        "bldoc": "bldoc"
+    "require-dev": {
+        "pestphp/pest": "^1.23",
+        "humbug/box": "^4.0"
     },
+    "bin": [
+        "bin/bldoc"
+    ],
     "autoload": {
-        "classmap": [
-            "BLParser.php",
-            "BLHtmlGenerator.php"
-        ]
+        "psr-4": {
+            "Blep\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "bin-dir": "vendor/bin",
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "scripts": {
-        "build": "./build.sh"
+        "test": "pest",
+        "build": "box compile"
     }
 }

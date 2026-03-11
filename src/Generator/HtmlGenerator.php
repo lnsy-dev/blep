@@ -1,6 +1,8 @@
 <?php
 
-class BLHtmlGenerator
+namespace Blep\Generator;
+
+class HtmlGenerator
 {
     private array $data;
     private string $outputDir;
