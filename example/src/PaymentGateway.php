@@ -23,6 +23,18 @@ class PaymentGateway {
     }
     
     /**
+     * @bl-topic Order Processing
+     * @bl-subtopic Payment Requirements
+     * @bl-detail Payment must be authorized before order enters processing
+     * @bl-detail Orders with declined payments remain in "pending" for 24 hours
+     * @bl-rationale Gives customers time to update payment method without losing cart
+     * @bl-detail After 24 hours, unpaid orders are automatically cancelled
+     */
+    public function validateOrderPayment($order) {
+        // Implementation
+    }
+    
+    /**
      * @bl-subtopic Refunds and Chargebacks
      * @bl-detail Refunds appear in 5-7 business days
      * @bl-detail Partial refunds allowed for partial returns

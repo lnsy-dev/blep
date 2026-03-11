@@ -22,12 +22,14 @@ example/
 
 The example demonstrates business logic documentation for:
 
-- **Order Processing** — Order validation, status workflow, fraud detection
+- **Order Processing** — Scattered across OrderService.php, PaymentGateway.php, and ShippingCalculator.php (demonstrates multi-file topic merging)
 - **Discount Rules** — Coupon codes, automatic discounts, loyalty program
 - **Shipping** — Shipping methods, address validation, delivery restrictions
 - **Returns Policy** — Return windows, return shipping, refund processing
 - **Payment Processing** — Payment methods, security, refunds and chargebacks
 - **Customer Accounts** — Account creation, verification, loyalty tiers
+
+**Note:** The "Order Processing" topic is intentionally split across three files to demonstrate how Blep automatically merges topics with the same name into a single documentation page.
 
 ## Usage
 
@@ -56,8 +58,9 @@ Open `output/index.html` in your browser to explore the documentation.
 
 ## Key Features Demonstrated
 
-- Multiple topics across multiple files
+- **Multi-file topic merging** — The "Order Processing" topic spans OrderService.php, PaymentGateway.php, and ShippingCalculator.php, all merged into one documentation page
 - Cross-references between related topics (e.g., Order Processing → Payment Processing)
 - Mix of docblock and inline comment annotations
 - Realistic business rules and constraints
 - Hierarchical organization with topics and subtopics
+- Each detail shows its source file and line number for traceability

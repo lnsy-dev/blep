@@ -56,9 +56,16 @@ composer build  # Creates single-file phar in build/
 
 1. **Add tags to your PHP code:**
    ```php
+   // In OrderService.php
    /**
     * @bl-topic Order Processing
     * @bl-detail Orders over $1000 require manager approval
+    */
+   
+   // In PaymentGateway.php - same topic, different file
+   /**
+    * @bl-topic Order Processing
+    * @bl-detail Payment must be authorized before order enters processing
     */
    ```
 
@@ -71,6 +78,8 @@ composer build  # Creates single-file phar in build/
    ```bash
    open bl-docs/index.html
    ```
+   
+   Topics from multiple files are automatically merged into a single documentation page.
 
 ## Usage
 
@@ -114,16 +123,27 @@ bldoc -v src/ lib/
 
 ### `@bl-topic`
 
-Defines a top-level documentation topic.
+Defines a top-level documentation topic. Topics with the same name across multiple files are automatically merged into a single documentation page.
 
 ```php
+// In OrderService.php
 /**
  * @bl-topic Order Processing
+ * @bl-subtopic Order Validation
+ * @bl-detail Orders over $1000 require manager approval
  */
-class OrderService {
-    // ...
-}
+class OrderService { }
+
+// In PaymentGateway.php - adds to the same "Order Processing" topic
+/**
+ * @bl-topic Order Processing
+ * @bl-subtopic Payment Requirements
+ * @bl-detail Payment must be authorized before order enters processing
+ */
+class PaymentGateway { }
 ```
+
+Both files contribute to a single "Order Processing" documentation page with two subtopics. Each detail shows its source file and line number.
 
 ### `@bl-subtopic`
 
@@ -174,6 +194,37 @@ Creates cross-references to related topics.
  * @bl-see Inventory Management: Stock Reservation
  */
 ```
+
+## Multi-File Topics
+
+Business logic for a single concept is often scattered across multiple files. Blep automatically merges topics with the same name into a single documentation page.
+
+**Example:** The "Order Processing" topic might span:
+- `OrderService.php` — validation and workflow rules
+- `PaymentGateway.php` — payment requirements
+- `ShippingCalculator.php` — shipping requirements
+
+All three files contribute to one "Order Processing" documentation page. Each detail shows its source file and line number for traceability.
+
+```php
+// OrderService.php
+/**
+ * @bl-topic Order Processing
+ * @bl-subtopic Order Validation
+ * @bl-detail Orders over $1000 require manager approval
+ */
+
+// PaymentGateway.php - adds to same topic
+/**
+ * @bl-topic Order Processing
+ * @bl-subtopic Payment Requirements
+ * @bl-detail Payment must be authorized before order enters processing
+ */
+```
+
+Result: One `topic-order-processing.html` page with both subtopics.
+
+See `example/output/topic-order-processing-EXAMPLE.html` for a complete demonstration.
 
 ## Example Output
 
