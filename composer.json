@@ -12,7 +12,7 @@
         "humbug/box": "^4.0"
     },
     "bin": [
-        "bin/bldoc"
+        "bin/blep"
     ],
     "autoload": {
         "psr-4": {
