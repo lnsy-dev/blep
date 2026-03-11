@@ -1,6 +1,42 @@
 # Quick Start Guide - New Features
 
-## 1. Using @bl-rationale
+## 1. Multi-File Topics
+
+Business logic for a single concept often spans multiple files. Blep automatically merges topics with the same name into one documentation page.
+
+```php
+// OrderService.php
+/**
+ * @bl-topic Order Processing
+ * @bl-subtopic Order Validation
+ * @bl-detail Orders over $1000 require manager approval
+ */
+
+// PaymentGateway.php - adds to same "Order Processing" topic
+/**
+ * @bl-topic Order Processing
+ * @bl-subtopic Payment Requirements
+ * @bl-detail Payment must be authorized before order enters processing
+ */
+```
+
+**Result**: One `topic-order-processing.html` page with both subtopics. Each detail shows its source file and line number.
+
+See [Multi-File Topics Guide](multi-file-topics.md) for complete documentation.
+
+## 2. Version Control Support
+
+Blep automatically detects your VCS and extracts change history:
+
+- **Git** - Detected via `.git` directory
+- **Subversion (SVN)** - Detected via `.svn` directory
+- **Perforce (P4)** - Detected via `p4 info` command
+
+No configuration needed - just run `blep` and it will detect your VCS automatically.
+
+See [VCS Support Guide](vcs-support.md) for implementation details.
+
+## 3. Using @bl-rationale
 
 Add rationale before or with your business rules:
 
@@ -15,7 +51,7 @@ Add rationale before or with your business rules:
 
 **Result**: A collapsible "Why?" button appears next to the detail in the generated docs.
 
-## 2. Viewing Change History
+## 12. Viewing Change History
 
 When you open a topic page, you'll see:
 
@@ -34,7 +70,9 @@ Expanded view shows:
   • g7h8i9j 2026-02-15 10:15 by John Doe — Initial implementation
 ```
 
-## 3. Using Search
+**Note**: History is available when using Git, Subversion, or Perforce. Blep automatically detects your VCS.
+
+## 11. Using Search
 
 ### Access Search
 - Click "🔍 Search" in navigation on any page
@@ -76,7 +114,7 @@ Each result card shows:
 - `"$1000"` - Find rules mentioning specific amounts
 - `"verification"` - Find verification requirements
 
-## 4. Using Changelog
+## 12. Using Changelog
 
 ### Access Changelog
 - Click "📋 Changelog" in navigation on any page
@@ -103,7 +141,7 @@ Initial implementation
 
 Each entry is clickable and takes you to the relevant topic page.
 
-## 5. Navigation Flow
+## 11. Navigation Flow
 
 ```
 Index Page
@@ -124,7 +162,7 @@ All pages have consistent navigation:
 - **Search**: ← Back to Index | Changelog
 - **Changelog**: ← Back to Index | Search
 
-## 6. For Business Users
+## 12. For Business Users
 
 ### Finding Information
 1. **Browse by topic** - Start at index.html
@@ -141,7 +179,7 @@ All pages have consistent navigation:
 - Share search results by copying URLs
 - Discuss rationale to understand trade-offs
 
-## 7. For Developers
+## 11. For Developers
 
 ### Documenting Rules
 ```php
@@ -172,7 +210,7 @@ php bl-doc-gen.php -o docs/ -t "My Project" src/
 php bl-doc-gen.php -v src/
 ```
 
-## 8. Tips & Tricks
+## 12. Tips & Tricks
 
 ### Search Tips
 - Use quotes for exact phrases: `"manager approval"`
@@ -191,7 +229,7 @@ php bl-doc-gen.php -v src/
 - Reference regulations, policies, or business goals
 - Keep it concise (1-2 sentences)
 
-## 9. Troubleshooting
+## 11. Troubleshooting
 
 ### No History Showing
 - Make sure your project is in a git repository
@@ -209,7 +247,7 @@ php bl-doc-gen.php -v src/
 - Check that tags are in docblock comments (/** */)
 - Regenerate docs after adding rationale
 
-## 10. Examples
+## 12. Examples
 
 See `example/src/` directory for complete examples:
 - `OrderService.php` - Multiple subtopics, cross-references

@@ -116,6 +116,8 @@ bldoc -v src/ lib/
 ## Documentation
 
 - [Quick Start Guide](docs/quickstart.md)
+- [Multi-File Topics](docs/multi-file-topics.md)
+- [VCS Support](docs/vcs-support.md)
 - [CLI Reference](docs/cli-reference.md)
 - [Project Structure](docs/project-structure.md)
 

@@ -86,6 +86,38 @@ public function createOrder($amount) {
 
     <section class="section">
         <div class="container">
+            <h2>multi-file topics</h2>
+            <p style="margin-bottom: 20px;">Business logic for a single concept is often scattered across multiple files. Blep automatically merges topics with the same name into a single documentation page.</p>
+            
+            <div class="step">
+                <strong>Example: Order Processing across multiple files</strong>
+                <pre>// OrderService.php
+/**
+ * @bl-topic Order Processing
+ * @bl-subtopic Order Validation
+ * @bl-detail Orders over $1000 require manager approval
+ */
+
+// PaymentGateway.php - adds to same topic
+/**
+ * @bl-topic Order Processing
+ * @bl-subtopic Payment Requirements
+ * @bl-detail Payment must be authorized before order enters processing
+ */
+
+// ShippingCalculator.php - also adds to same topic
+/**
+ * @bl-topic Order Processing
+ * @bl-subtopic Shipping Requirements
+ * @bl-detail Free shipping applies to orders over $50
+ */</pre>
+                <p style="margin-top: 10px;"><strong>Result:</strong> One <code>topic-order-processing.html</code> page with all three subtopics. Each detail shows its source file and line number for traceability.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
             <h2>features</h2>
             
             <div class="feature">
@@ -96,17 +128,19 @@ public function createOrder($amount) {
                     <li>@bl-detail - document specific business rules and workflow steps</li>
                     <li>@bl-rationale - explain why rules exist (appears in collapsible sections)</li>
                     <li>@bl-see - cross-reference related topics and create navigation links</li>
+                    <li>multi-file topics - same topic name across files automatically merges into one page</li>
                 </ul>
             </div>
 
             <div class="feature">
-                <h3>git integration</h3>
+                <h3>version control integration</h3>
                 <ul class="feature-list">
-                    <li>automatic change history tracking via git, Subversion, or Perforce</li>
+                    <li>automatic VCS detection - supports Git, Subversion (SVN), and Perforce (P4)</li>
                     <li>shows last modified date and author for each detail</li>
                     <li>displays recent commits affecting specific business rules</li>
                     <li>generates timeline changelog of all business logic changes</li>
                     <li>links source file locations with line numbers</li>
+                    <li>no configuration needed - detects VCS automatically</li>
                 </ul>
             </div>
 
