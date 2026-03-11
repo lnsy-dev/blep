@@ -1,4 +1,4 @@
-# Blep Demo - E-Commerce Business Rules
+# E-Commerce Business Rules
 
 - [Customer Accounts](topic-customer-accounts.md)
 - [Discount Rules](topic-discount-rules.md)
@@ -8,4 +8,4 @@
 - [Shipping](topic-shipping.md)
 
 ---
-*Generated on 2026-03-11 19:23:15*
+*Generated on 2026-03-11 21:03:03*

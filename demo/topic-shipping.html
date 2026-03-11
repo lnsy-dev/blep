@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shipping - Blep Demo - E-Commerce Business Rules</title>
+<title>Shipping - E-Commerce Business Rules</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { height: 100%; }
@@ -75,6 +75,19 @@ footer { margin-top: auto; padding-top: 20px; border-top: 2px solid #ccc; }
     public function checkRestrictions($order) {
         // Implementation
     }
+    
+    /**
+     * @bl-topic Order Processing
+     * @bl-subtopic Shipping Requirements
+     * @bl-detail Free shipping applies to orders over $50
+     * @bl-detail Orders cannot ship until payment is captured
+     * @bl-detail Shipping labels generated automatically when order status changes to &quot;processing&quot;
+     * @bl-detail Tracking numbers emailed to customer within 1 hour of shipment
+     * @bl-see Shipping: Shipping Methods
+     */
+    public function prepareShipment($order) {
+        // Implementation
+    }
 }</code></pre></details>
 <h2 id="address-validation">Address Validation</h2>
 <p class="src-location">ShippingCalculator.php:15 — last updated 2026-03-10 01:25 by lnsy</p>
@@ -102,6 +115,6 @@ footer { margin-top: auto; padding-top: 20px; border-top: 2px solid #ccc; }
         // Implementation
     }</code></pre></details>
 
-<footer>generated 2026-03-11 19:23:15</footer>
+<footer>generated 2026-03-11 21:03:03</footer>
 </body>
 </html>

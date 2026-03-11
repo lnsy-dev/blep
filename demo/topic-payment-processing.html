@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Payment Processing - Blep Demo - E-Commerce Business Rules</title>
+<title>Payment Processing - E-Commerce Business Rules</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { height: 100%; }
@@ -68,6 +68,18 @@ footer { margin-top: auto; padding-top: 20px; border-top: 2px solid #ccc; }
     }
     
     /**
+     * @bl-topic Order Processing
+     * @bl-subtopic Payment Requirements
+     * @bl-detail Payment must be authorized before order enters processing
+     * @bl-detail Orders with declined payments remain in &quot;pending&quot; for 24 hours
+     * @bl-rationale Gives customers time to update payment method without losing cart
+     * @bl-detail After 24 hours, unpaid orders are automatically cancelled
+     */
+    public function validateOrderPayment($order) {
+        // Implementation
+    }
+    
+    /**
      * @bl-subtopic Refunds and Chargebacks
      * @bl-detail Refunds appear in 5-7 business days
      * @bl-detail Partial refunds allowed for partial returns
@@ -93,19 +105,6 @@ footer { margin-top: auto; padding-top: 20px; border-top: 2px solid #ccc; }
 <details class="code-block"><summary>code</summary><pre><code class="language-php">    public function processPayment($order, $paymentMethod) {
         // @bl-detail Card authorization holds funds for 7 days
         // @bl-detail Capture happens when order ships
-    }</code></pre></details>
-<h2 id="refunds-and-chargebacks">Refunds and Chargebacks</h2>
-<p class="src-location">PaymentGateway.php:27 — last updated 2026-03-10 01:25 by lnsy</p>
-<details class="history-block"><summary>Recent Changes</summary><ul><li><code>5b7fa60</code> 2026-03-10 01:25 by lnsy — initial commit</li>
-</ul></details>
-<ul>
-<li>Refunds appear in 5-7 business days</li>
-<li>Partial refunds allowed for partial returns</li>
-<li>Chargebacks trigger account review</li>
-<li>More than 2 chargebacks result in payment method ban</li>
-</ul>
-<details class="code-block"><summary>code</summary><pre><code class="language-php">    public function processRefund($transaction) {
-        // Implementation
     }</code></pre></details>
 <h2 id="refund-rules">Refund Rules</h2>
 <p class="src-location">RefundService.php:7 — last updated 2026-03-10 02:29 by lnsy</p>
@@ -140,6 +139,6 @@ footer { margin-top: auto; padding-top: 20px; border-top: 2px solid #ccc; }
         // Implementation
     }</code></pre></details>
 
-<footer>generated 2026-03-11 19:23:15</footer>
+<footer>generated 2026-03-11 21:03:03</footer>
 </body>
 </html>

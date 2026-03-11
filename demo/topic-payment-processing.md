@@ -27,6 +27,18 @@ class PaymentGateway {
     }
     
     /**
+     * @bl-topic Order Processing
+     * @bl-subtopic Payment Requirements
+     * @bl-detail Payment must be authorized before order enters processing
+     * @bl-detail Orders with declined payments remain in "pending" for 24 hours
+     * @bl-rationale Gives customers time to update payment method without losing cart
+     * @bl-detail After 24 hours, unpaid orders are automatically cancelled
+     */
+    public function validateOrderPayment($order) {
+        // Implementation
+    }
+    
+    /**
      * @bl-subtopic Refunds and Chargebacks
      * @bl-detail Refunds appear in 5-7 business days
      * @bl-detail Partial refunds allowed for partial returns
@@ -54,21 +66,6 @@ class PaymentGateway {
     public function processPayment($order, $paymentMethod) {
         // @bl-detail Card authorization holds funds for 7 days
         // @bl-detail Capture happens when order ships
-    }
-```
-
-## Refunds and Chargebacks
-
-*PaymentGateway.php:27 — last updated 2026-03-10 01:25 by lnsy*
-
-- Refunds appear in 5-7 business days
-- Partial refunds allowed for partial returns
-- Chargebacks trigger account review
-- More than 2 chargebacks result in payment method ban
-
-```php
-    public function processRefund($transaction) {
-        // Implementation
     }
 ```
 
@@ -109,4 +106,4 @@ class RefundService {
 ```
 
 ---
-*Generated on 2026-03-11 19:23:15*
+*Generated on 2026-03-11 21:03:03*

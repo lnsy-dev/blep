@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Changelog - Blep Demo - E-Commerce Business Rules</title>
+<title>Changelog - E-Commerce Business Rules</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { height: 100%; }
@@ -44,6 +44,86 @@ footer { margin-top: auto; padding-top: 20px; border-top: 2px solid #ccc; }
 <nav><a href="index.html">← index</a> | <a href="search.html">search</a></nav>
 <h1>changelog</h1>
 <p class="subtitle">recent changes to business logic documentation</p>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-11 20:45</span>
+    <span class="changelog-hash">f644c17</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#shipping-requirements">Order Processing → Shipping Requirements</a></div>
+  <div class="changelog-detail">Free shipping applies to orders over $50</div>
+  <div class="changelog-message">Update example to highlight multi-file topic merging feature</div>
+</div>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-11 20:45</span>
+    <span class="changelog-hash">f644c17</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#order-validation">Order Processing → Order Validation</a></div>
+  <div class="changelog-detail">Orders over $1000 require manager approval</div>
+  <div class="changelog-message">Update example to highlight multi-file topic merging feature</div>
+</div>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-11 20:28</span>
+    <span class="changelog-hash">68c36aa</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#payment-requirements">Order Processing → Payment Requirements</a></div>
+  <div class="changelog-detail">Payment must be authorized before order enters processing</div>
+  <div class="changelog-message">Document multi-file topic merging feature</div>
+</div>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-11 20:28</span>
+    <span class="changelog-hash">68c36aa</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#payment-requirements">Order Processing → Payment Requirements</a></div>
+  <div class="changelog-detail">Orders with declined payments remain in &quot;pending&quot; for 24 hours</div>
+  <div class="changelog-message">Document multi-file topic merging feature</div>
+</div>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-11 20:28</span>
+    <span class="changelog-hash">68c36aa</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#payment-requirements">Order Processing → Payment Requirements</a></div>
+  <div class="changelog-detail">After 24 hours, unpaid orders are automatically cancelled</div>
+  <div class="changelog-message">Document multi-file topic merging feature</div>
+</div>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-11 20:28</span>
+    <span class="changelog-hash">68c36aa</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#shipping-requirements">Order Processing → Shipping Requirements</a></div>
+  <div class="changelog-detail">Orders cannot ship until payment is captured</div>
+  <div class="changelog-message">Document multi-file topic merging feature</div>
+</div>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-11 20:28</span>
+    <span class="changelog-hash">68c36aa</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#shipping-requirements">Order Processing → Shipping Requirements</a></div>
+  <div class="changelog-detail">Shipping labels generated automatically when order status changes to &quot;processing&quot;</div>
+  <div class="changelog-message">Document multi-file topic merging feature</div>
+</div>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-11 20:28</span>
+    <span class="changelog-hash">68c36aa</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#shipping-requirements">Order Processing → Shipping Requirements</a></div>
+  <div class="changelog-detail">Tracking numbers emailed to customer within 1 hour of shipment</div>
+  <div class="changelog-message">Document multi-file topic merging feature</div>
+</div>
 <div class="changelog-item">
   <div class="changelog-meta">
     <span class="changelog-date">2026-03-10 02:29</span>
@@ -310,7 +390,7 @@ footer { margin-top: auto; padding-top: 20px; border-top: 2px solid #ccc; }
     <span class="changelog-hash">5b7fa60</span>
     <span class="changelog-author">lnsy</span>
   </div>
-  <div class="changelog-topic"><a href="topic-payment-processing.html#refunds-and-chargebacks">Payment Processing → Refunds and Chargebacks</a></div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#refunds-and-chargebacks">Order Processing → Refunds and Chargebacks</a></div>
   <div class="changelog-detail">Refunds appear in 5-7 business days</div>
   <div class="changelog-message">initial commit</div>
 </div>
@@ -320,7 +400,7 @@ footer { margin-top: auto; padding-top: 20px; border-top: 2px solid #ccc; }
     <span class="changelog-hash">5b7fa60</span>
     <span class="changelog-author">lnsy</span>
   </div>
-  <div class="changelog-topic"><a href="topic-payment-processing.html#refunds-and-chargebacks">Payment Processing → Refunds and Chargebacks</a></div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#refunds-and-chargebacks">Order Processing → Refunds and Chargebacks</a></div>
   <div class="changelog-detail">Partial refunds allowed for partial returns</div>
   <div class="changelog-message">initial commit</div>
 </div>
@@ -330,7 +410,7 @@ footer { margin-top: auto; padding-top: 20px; border-top: 2px solid #ccc; }
     <span class="changelog-hash">5b7fa60</span>
     <span class="changelog-author">lnsy</span>
   </div>
-  <div class="changelog-topic"><a href="topic-payment-processing.html#refunds-and-chargebacks">Payment Processing → Refunds and Chargebacks</a></div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#refunds-and-chargebacks">Order Processing → Refunds and Chargebacks</a></div>
   <div class="changelog-detail">Chargebacks trigger account review</div>
   <div class="changelog-message">initial commit</div>
 </div>
@@ -340,8 +420,128 @@ footer { margin-top: auto; padding-top: 20px; border-top: 2px solid #ccc; }
     <span class="changelog-hash">5b7fa60</span>
     <span class="changelog-author">lnsy</span>
   </div>
-  <div class="changelog-topic"><a href="topic-payment-processing.html#refunds-and-chargebacks">Payment Processing → Refunds and Chargebacks</a></div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#refunds-and-chargebacks">Order Processing → Refunds and Chargebacks</a></div>
   <div class="changelog-detail">More than 2 chargebacks result in payment method ban</div>
+  <div class="changelog-message">initial commit</div>
+</div>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-10 01:25</span>
+    <span class="changelog-hash">5b7fa60</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#order-validation">Order Processing → Order Validation</a></div>
+  <div class="changelog-detail">Minimum order value is $10.00</div>
+  <div class="changelog-message">initial commit</div>
+</div>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-10 01:25</span>
+    <span class="changelog-hash">5b7fa60</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#order-validation">Order Processing → Order Validation</a></div>
+  <div class="changelog-detail">Maximum order value is $50,000.00 without manual approval</div>
+  <div class="changelog-message">initial commit</div>
+</div>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-10 01:25</span>
+    <span class="changelog-hash">5b7fa60</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#order-status-workflow">Order Processing → Order Status Workflow</a></div>
+  <div class="changelog-detail">New orders start in &quot;pending&quot; status</div>
+  <div class="changelog-message">initial commit</div>
+</div>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-10 01:25</span>
+    <span class="changelog-hash">5b7fa60</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#order-status-workflow">Order Processing → Order Status Workflow</a></div>
+  <div class="changelog-detail">Orders move to &quot;processing&quot; after payment confirmation</div>
+  <div class="changelog-message">initial commit</div>
+</div>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-10 01:25</span>
+    <span class="changelog-hash">5b7fa60</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#order-status-workflow">Order Processing → Order Status Workflow</a></div>
+  <div class="changelog-detail">Orders move to &quot;shipped&quot; when carrier picks up package</div>
+  <div class="changelog-message">initial commit</div>
+</div>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-10 01:25</span>
+    <span class="changelog-hash">5b7fa60</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#order-status-workflow">Order Processing → Order Status Workflow</a></div>
+  <div class="changelog-detail">Orders move to &quot;delivered&quot; when customer confirms receipt</div>
+  <div class="changelog-message">initial commit</div>
+</div>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-10 01:25</span>
+    <span class="changelog-hash">5b7fa60</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#order-status-workflow">Order Processing → Order Status Workflow</a></div>
+  <div class="changelog-detail">Customers can cancel orders only in &quot;pending&quot; status</div>
+  <div class="changelog-message">initial commit</div>
+</div>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-10 01:25</span>
+    <span class="changelog-hash">5b7fa60</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#order-status-workflow">Order Processing → Order Status Workflow</a></div>
+  <div class="changelog-detail">Inventory is reserved for 15 minutes during checkout</div>
+  <div class="changelog-message">initial commit</div>
+</div>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-10 01:25</span>
+    <span class="changelog-hash">5b7fa60</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#order-status-workflow">Order Processing → Order Status Workflow</a></div>
+  <div class="changelog-detail">If payment fails, inventory reservation is released</div>
+  <div class="changelog-message">initial commit</div>
+</div>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-10 01:25</span>
+    <span class="changelog-hash">5b7fa60</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#fraud-detection">Order Processing → Fraud Detection</a></div>
+  <div class="changelog-detail">Orders with mismatched billing/shipping addresses are flagged</div>
+  <div class="changelog-message">initial commit</div>
+</div>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-10 01:25</span>
+    <span class="changelog-hash">5b7fa60</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#fraud-detection">Order Processing → Fraud Detection</a></div>
+  <div class="changelog-detail">More than 3 orders from same IP in 1 hour triggers review</div>
+  <div class="changelog-message">initial commit</div>
+</div>
+<div class="changelog-item">
+  <div class="changelog-meta">
+    <span class="changelog-date">2026-03-10 01:25</span>
+    <span class="changelog-hash">5b7fa60</span>
+    <span class="changelog-author">lnsy</span>
+  </div>
+  <div class="changelog-topic"><a href="topic-order-processing.html#fraud-detection">Order Processing → Fraud Detection</a></div>
+  <div class="changelog-detail">High-value orders to new customers require phone verification</div>
   <div class="changelog-message">initial commit</div>
 </div>
 <div class="changelog-item">
@@ -684,137 +884,7 @@ footer { margin-top: auto; padding-top: 20px; border-top: 2px solid #ccc; }
   <div class="changelog-detail">Points cannot be redeemed on gift cards</div>
   <div class="changelog-message">initial commit</div>
 </div>
-<div class="changelog-item">
-  <div class="changelog-meta">
-    <span class="changelog-date">2026-03-10 01:25</span>
-    <span class="changelog-hash">5b7fa60</span>
-    <span class="changelog-author">lnsy</span>
-  </div>
-  <div class="changelog-topic"><a href="topic-order-processing.html#order-validation">Order Processing → Order Validation</a></div>
-  <div class="changelog-detail">Minimum order value is $10.00</div>
-  <div class="changelog-message">initial commit</div>
-</div>
-<div class="changelog-item">
-  <div class="changelog-meta">
-    <span class="changelog-date">2026-03-10 01:25</span>
-    <span class="changelog-hash">5b7fa60</span>
-    <span class="changelog-author">lnsy</span>
-  </div>
-  <div class="changelog-topic"><a href="topic-order-processing.html#order-validation">Order Processing → Order Validation</a></div>
-  <div class="changelog-detail">Maximum order value is $50,000.00 without manual approval</div>
-  <div class="changelog-message">initial commit</div>
-</div>
-<div class="changelog-item">
-  <div class="changelog-meta">
-    <span class="changelog-date">2026-03-10 01:25</span>
-    <span class="changelog-hash">5b7fa60</span>
-    <span class="changelog-author">lnsy</span>
-  </div>
-  <div class="changelog-topic"><a href="topic-order-processing.html#order-validation">Order Processing → Order Validation</a></div>
-  <div class="changelog-detail">Orders over $1,000 require manager approval</div>
-  <div class="changelog-message">initial commit</div>
-</div>
-<div class="changelog-item">
-  <div class="changelog-meta">
-    <span class="changelog-date">2026-03-10 01:25</span>
-    <span class="changelog-hash">5b7fa60</span>
-    <span class="changelog-author">lnsy</span>
-  </div>
-  <div class="changelog-topic"><a href="topic-order-processing.html#order-status-workflow">Order Processing → Order Status Workflow</a></div>
-  <div class="changelog-detail">New orders start in &quot;pending&quot; status</div>
-  <div class="changelog-message">initial commit</div>
-</div>
-<div class="changelog-item">
-  <div class="changelog-meta">
-    <span class="changelog-date">2026-03-10 01:25</span>
-    <span class="changelog-hash">5b7fa60</span>
-    <span class="changelog-author">lnsy</span>
-  </div>
-  <div class="changelog-topic"><a href="topic-order-processing.html#order-status-workflow">Order Processing → Order Status Workflow</a></div>
-  <div class="changelog-detail">Orders move to &quot;processing&quot; after payment confirmation</div>
-  <div class="changelog-message">initial commit</div>
-</div>
-<div class="changelog-item">
-  <div class="changelog-meta">
-    <span class="changelog-date">2026-03-10 01:25</span>
-    <span class="changelog-hash">5b7fa60</span>
-    <span class="changelog-author">lnsy</span>
-  </div>
-  <div class="changelog-topic"><a href="topic-order-processing.html#order-status-workflow">Order Processing → Order Status Workflow</a></div>
-  <div class="changelog-detail">Orders move to &quot;shipped&quot; when carrier picks up package</div>
-  <div class="changelog-message">initial commit</div>
-</div>
-<div class="changelog-item">
-  <div class="changelog-meta">
-    <span class="changelog-date">2026-03-10 01:25</span>
-    <span class="changelog-hash">5b7fa60</span>
-    <span class="changelog-author">lnsy</span>
-  </div>
-  <div class="changelog-topic"><a href="topic-order-processing.html#order-status-workflow">Order Processing → Order Status Workflow</a></div>
-  <div class="changelog-detail">Orders move to &quot;delivered&quot; when customer confirms receipt</div>
-  <div class="changelog-message">initial commit</div>
-</div>
-<div class="changelog-item">
-  <div class="changelog-meta">
-    <span class="changelog-date">2026-03-10 01:25</span>
-    <span class="changelog-hash">5b7fa60</span>
-    <span class="changelog-author">lnsy</span>
-  </div>
-  <div class="changelog-topic"><a href="topic-order-processing.html#order-status-workflow">Order Processing → Order Status Workflow</a></div>
-  <div class="changelog-detail">Customers can cancel orders only in &quot;pending&quot; status</div>
-  <div class="changelog-message">initial commit</div>
-</div>
-<div class="changelog-item">
-  <div class="changelog-meta">
-    <span class="changelog-date">2026-03-10 01:25</span>
-    <span class="changelog-hash">5b7fa60</span>
-    <span class="changelog-author">lnsy</span>
-  </div>
-  <div class="changelog-topic"><a href="topic-order-processing.html#order-status-workflow">Order Processing → Order Status Workflow</a></div>
-  <div class="changelog-detail">Inventory is reserved for 15 minutes during checkout</div>
-  <div class="changelog-message">initial commit</div>
-</div>
-<div class="changelog-item">
-  <div class="changelog-meta">
-    <span class="changelog-date">2026-03-10 01:25</span>
-    <span class="changelog-hash">5b7fa60</span>
-    <span class="changelog-author">lnsy</span>
-  </div>
-  <div class="changelog-topic"><a href="topic-order-processing.html#order-status-workflow">Order Processing → Order Status Workflow</a></div>
-  <div class="changelog-detail">If payment fails, inventory reservation is released</div>
-  <div class="changelog-message">initial commit</div>
-</div>
-<div class="changelog-item">
-  <div class="changelog-meta">
-    <span class="changelog-date">2026-03-10 01:25</span>
-    <span class="changelog-hash">5b7fa60</span>
-    <span class="changelog-author">lnsy</span>
-  </div>
-  <div class="changelog-topic"><a href="topic-order-processing.html#fraud-detection">Order Processing → Fraud Detection</a></div>
-  <div class="changelog-detail">Orders with mismatched billing/shipping addresses are flagged</div>
-  <div class="changelog-message">initial commit</div>
-</div>
-<div class="changelog-item">
-  <div class="changelog-meta">
-    <span class="changelog-date">2026-03-10 01:25</span>
-    <span class="changelog-hash">5b7fa60</span>
-    <span class="changelog-author">lnsy</span>
-  </div>
-  <div class="changelog-topic"><a href="topic-order-processing.html#fraud-detection">Order Processing → Fraud Detection</a></div>
-  <div class="changelog-detail">More than 3 orders from same IP in 1 hour triggers review</div>
-  <div class="changelog-message">initial commit</div>
-</div>
-<div class="changelog-item">
-  <div class="changelog-meta">
-    <span class="changelog-date">2026-03-10 01:25</span>
-    <span class="changelog-hash">5b7fa60</span>
-    <span class="changelog-author">lnsy</span>
-  </div>
-  <div class="changelog-topic"><a href="topic-order-processing.html#fraud-detection">Order Processing → Fraud Detection</a></div>
-  <div class="changelog-detail">High-value orders to new customers require phone verification</div>
-  <div class="changelog-message">initial commit</div>
-</div>
 
-<footer>generated 2026-03-11 19:23:15</footer>
+<footer>generated 2026-03-11 21:03:03</footer>
 </body>
 </html>
