@@ -2,16 +2,25 @@
 
 namespace Blep\Parser;
 
+use Blep\VCS\VCSFactory;
+use Blep\VCS\VCSInterface;
+
 class BLParser
 {
     private array $data = [];
     private array $warnings = [];
+    private ?VCSInterface $vcs = null;
 
     public function addFile(string $filePath): void
     {
         if (!file_exists($filePath) || !is_readable($filePath)) {
             $this->warnings[] = "Cannot read file: $filePath";
             return;
+        }
+
+        // Detect VCS on first file
+        if ($this->vcs === null) {
+            $this->vcs = VCSFactory::detect($filePath);
         }
 
         $lines = file($filePath, FILE_IGNORE_NEW_LINES);
@@ -83,8 +92,8 @@ class BLParser
                     'fullPath' => $filePath,
                     'line' => $lineNumber,
                     'snippet' => $this->extractSnippet($lines, $lineNum),
-                    'blame' => $this->getGitBlame($filePath, $lineNumber),
-                    'history' => $this->getGitHistory($filePath, $lineNumber),
+                    'blame' => $this->getBlame($filePath, $lineNumber),
+                    'history' => $this->getHistory($filePath, $lineNumber),
                     'rationale' => $currentRationale
                 ];
                 $currentRationale = null;
@@ -135,6 +144,16 @@ class BLParser
     public function getWarnings(): array
     {
         return $this->warnings;
+    }
+
+    private function getBlame(string $filePath, int $lineNumber): ?array
+    {
+        return $this->vcs ? $this->vcs->getBlame($filePath, $lineNumber) : null;
+    }
+
+    private function getHistory(string $filePath, int $lineNumber, int $limit = 10): array
+    {
+        return $this->vcs ? $this->vcs->getHistory($filePath, $lineNumber, $limit) : [];
     }
 
     private function getGitBlame(string $filePath, int $lineNumber): ?array

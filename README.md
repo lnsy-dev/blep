@@ -18,7 +18,7 @@ Document your application's business rules, workflows, and domain logic directly
 - **Fast scanning** — Recursively processes directories
 - **Clean HTML output** — Responsive, readable documentation site
 - **Cross-references** — Link related topics with `@bl-see`
-- **Change history** — Track business rule changes over time with git integration
+- **Change history** — Track business rule changes over time with git, Subversion, or Perforce
 - **Interactive search** — Full-text search powered by Fuse.js
 - **Rationale tracking** — Document why rules exist with `@bl-rationale`
 
@@ -239,10 +239,25 @@ The tool generates:
 
 Each detail includes:
 - Source file and line number for easy reference
-- Last modified date and author (from git blame)
+- Last modified date and author (from version control)
 - Recent change history (last 5 commits affecting that line)
 - Rationale in collapsible "Why?" sections
 - Code snippets in collapsible sections
+
+## Version Control Support
+
+Blep automatically detects and uses your version control system to track change history:
+
+- **Git** — Detected via `.git` directory
+- **Subversion (SVN)** — Detected via `.svn` directory  
+- **Perforce (P4)** — Detected via `p4 info` command
+
+The tool will automatically use the appropriate VCS commands to extract:
+- Author and timestamp for each business rule
+- Change history showing when rules were modified
+- Commit messages explaining why changes were made
+
+No configuration needed — just run `bldoc` in your project and it will detect your VCS automatically.
 
 ## Requirements
 
