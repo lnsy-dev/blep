@@ -3,9 +3,9 @@
 /**
  * @bl-topic Order Processing
  * @bl-subtopic Order Validation
+ * @bl-detail Orders over $1000 require manager approval
  * @bl-detail Minimum order value is $10.00
  * @bl-detail Maximum order value is $50,000.00 without manual approval
- * @bl-detail Orders over $1,000 require manager approval
  * @bl-see Payment Processing
  */
 class OrderService {

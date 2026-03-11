@@ -34,6 +34,7 @@ class ShippingCalculator {
     /**
      * @bl-topic Order Processing
      * @bl-subtopic Shipping Requirements
+     * @bl-detail Free shipping applies to orders over $50
      * @bl-detail Orders cannot ship until payment is captured
      * @bl-detail Shipping labels generated automatically when order status changes to "processing"
      * @bl-detail Tracking numbers emailed to customer within 1 hour of shipment
