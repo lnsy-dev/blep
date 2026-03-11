@@ -1,9 +1,20 @@
 {
-    "name": "blep/blep",
+    "name": "lnsy-dev/blep",
     "description": "Business Logic Documentation Generator - Extract @bl-* tags from PHP code and generate clean HTML documentation",
     "type": "library",
     "license": "MIT",
-    "keywords": ["documentation", "business-logic", "php", "generator"],
+    "keywords": ["documentation", "business-logic", "php", "generator", "static-site", "code-documentation"],
+    "homepage": "https://github.com/lnsy-dev/blep",
+    "authors": [
+        {
+            "name": "LNSY",
+            "homepage": "https://github.com/lnsy-dev"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/lnsy-dev/blep/issues",
+        "source": "https://github.com/lnsy-dev/blep"
+    },
     "require": {
         "php": ">=7.4"
     },
