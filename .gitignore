@@ -15,6 +15,9 @@ composer.lock
 .phpunit.result.cache
 /.pest/
 
+# Claude Code
+.claude/
+
 # IDE
 .idea/
 .vscode/
