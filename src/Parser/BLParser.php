@@ -24,27 +24,48 @@ class BLParser
         }
 
         $lines = file($filePath, FILE_IGNORE_NEW_LINES);
+        $fileTopic = null;
+        $fileSubtopic = null;
         $currentTopic = null;
         $currentSubtopic = null;
         $currentRationale = null;
         $inDocblock = false;
+        $seenClassOrFunction = false;
+        $braceDepth = 0;
 
         foreach ($lines as $lineNum => $line) {
             $lineNumber = $lineNum + 1;
 
-            // Track docblock state
-            if (preg_match('#/\*\*#', $line)) {
+            // Track block comment state (/** and /*)
+            if (preg_match('#/\*#', $line)) {
                 $inDocblock = true;
+                // Only reset to file defaults when entering a class/method-level docblock
+                // (brace depth <= 1 means we're at file or class scope, not inside a method body)
+                if ($seenClassOrFunction && $braceDepth <= 1) {
+                    $currentTopic = $fileTopic;
+                    $currentSubtopic = $fileSubtopic;
+                    $currentRationale = null;
+                }
             }
             if (preg_match('#\*/#', $line)) {
                 $inDocblock = false;
+            }
+
+            // Track brace depth to distinguish method docblocks from inline block comments
+            if (!$inDocblock) {
+                $braceDepth += substr_count($line, '{') - substr_count($line, '}');
+            }
+
+            // Track when we reach the first class/function declaration (end of file-level scope)
+            if (!$inDocblock && !$seenClassOrFunction && preg_match('/^\s*(class\s|function\s)/', $line)) {
+                $seenClassOrFunction = true;
             }
 
             // Extract @bl-* tags
             if ($inDocblock && preg_match('#@bl-(topic|subtopic|detail|details|see|rationale)\s+(.+)#', $line, $m)) {
                 $tag = $m[1];
                 $text = trim($m[2]);
-            } elseif (preg_match('#//\s*@bl-(detail|details|see|rationale)\s+(.+)#', $line, $m)) {
+            } elseif (preg_match('#//\s*@bl-(topic|subtopic|detail|details|see|rationale)\s+(.+)#', $line, $m)) {
                 $tag = $m[1];
                 $text = trim($m[2]);
             } else {
@@ -61,6 +82,11 @@ class BLParser
                 $currentTopic = $text;
                 $currentSubtopic = null;
                 $currentRationale = null;
+                // File-level docblock sets the inherited defaults for all functions
+                if (!$seenClassOrFunction) {
+                    $fileTopic = $text;
+                    $fileSubtopic = null;
+                }
                 if (!isset($this->data[$currentTopic])) {
                     $this->data[$currentTopic] = [];
                 }
@@ -71,6 +97,10 @@ class BLParser
                 }
                 $currentSubtopic = $text;
                 $currentRationale = null;
+                // File-level subtopic also sets the inherited default
+                if (!$seenClassOrFunction) {
+                    $fileSubtopic = $text;
+                }
                 if (!isset($this->data[$currentTopic][$currentSubtopic])) {
                     $this->data[$currentTopic][$currentSubtopic] = [];
                 }

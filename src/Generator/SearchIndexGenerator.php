@@ -48,6 +48,10 @@ class SearchIndexGenerator
             }
         }
 
+        if (!is_dir($this->outputDir)) {
+            mkdir($this->outputDir, 0755, true);
+        }
+
         file_put_contents(
             "{$this->outputDir}/search-index.json",
             json_encode($index, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
