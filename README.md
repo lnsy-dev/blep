@@ -2,7 +2,7 @@
 
 [![PHP Version](https://img.shields.io/badge/php-%3E%3D7.4-blue)](https://php.net)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![GitHub Pages](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://yourusername.github.io/blep)
+[![GitHub](https://img.shields.io/badge/github-lnsy--dev%2Fblep-blue)](https://github.com/lnsy-dev/blep)
 
 A lightweight PHP tool that extracts business logic documentation from code comments and generates a clean, browsable static HTML site.
 
@@ -24,33 +24,17 @@ Document your application's business rules, workflows, and domain logic directly
 
 ## Installation
 
-### Option 1: Composer (Recommended)
+Clone the repository from GitHub and run from source:
 
 ```bash
-composer require blep/blep
-```
-
-Or install globally:
-
-```bash
-composer global require blep/blep
-```
-
-### Option 2: Single-file phar download
-
-```bash
-curl -O https://github.com/yourusername/blep/releases/latest/download/bldoc
-chmod +x bldoc
-```
-
-### Option 3: From source
-
-```bash
-git clone https://github.com/yourusername/blep.git
+git clone https://github.com/lnsy-dev/blep.git
 cd blep
 composer install
-composer build  # Creates single-file phar in build/
 ```
+
+Then run using `./bin/blep`.
+
+> **Tip:** Add the `bin/` directory to your `$PATH`, or copy `bin/blep` somewhere on your path, to use `blep` from anywhere.
 
 ## Quick Start
 
@@ -71,7 +55,7 @@ composer build  # Creates single-file phar in build/
 
 2. **Generate documentation:**
    ```bash
-   ./vendor/bin/bldoc src/
+   ./bin/blep src/
    ```
 
 3. **Browse your docs:**
@@ -86,20 +70,20 @@ composer build  # Creates single-file phar in build/
 ### Basic
 
 ```bash
-bldoc src/
+blep src/
 ```
 
 ### With options
 
 ```bash
 # Custom output directory and title
-bldoc -o docs/ -t "My Project Docs" src/
+blep -o docs/ -t "My Project Docs" src/
 
 # Exclude directories
-bldoc --exclude vendor/ --exclude tests/ .
+blep --exclude vendor/ --exclude tests/ .
 
 # Verbose output
-bldoc -v src/ lib/
+blep -v src/ lib/
 ```
 
 ### Command-line options
@@ -303,7 +287,7 @@ The tool will automatically use the appropriate VCS commands to extract:
 - Change history showing when rules were modified
 - Commit messages explaining why changes were made
 
-No configuration needed — just run `bldoc` in your project and it will detect your VCS automatically.
+No configuration needed — just run `blep` in your project and it will detect your VCS automatically.
 
 ## Requirements
 
@@ -315,7 +299,7 @@ No configuration needed — just run `bldoc` in your project and it will detect 
 ### Setup
 
 ```bash
-git clone https://github.com/yourusername/blep.git
+git clone https://github.com/lnsy-dev/blep.git
 cd blep
 composer install
 ```
@@ -328,7 +312,7 @@ composer build
 ./vendor/bin/box compile
 ```
 
-Creates `build/bldoc` — a single-file phar executable.
+Creates `build/blep` — a single-file phar executable.
 
 ### Testing
 
@@ -339,7 +323,7 @@ composer test
 ./vendor/bin/pest
 
 # Test on example project
-./bin/bldoc -v example/src/
+./bin/blep -v example/src/
 ```
 
 ## Contributing
@@ -352,7 +336,5 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Links
 
-- [Documentation](https://yourusername.github.io/blep)
-- [GitHub Repository](https://github.com/yourusername/blep)
-- [Issue Tracker](https://github.com/yourusername/blep/issues)
-- [Releases](https://github.com/yourusername/blep/releases)
+- [GitHub Repository](https://github.com/lnsy-dev/blep)
+- [Issue Tracker](https://github.com/lnsy-dev/blep/issues)
