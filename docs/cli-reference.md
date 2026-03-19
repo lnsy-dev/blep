@@ -40,6 +40,15 @@ php bl-doc-gen.php [OPTIONS] <source-path> [<source-path> ...]
   - `-t "My Project Documentation"`
   - `--title "E-Commerce Business Rules"`
 
+**--template-folder <directory>**
+- Path to a folder containing custom template files
+- Template files in this folder override the built-in defaults
+- Missing template files fall back to built-in defaults (partial overrides supported)
+- See the `generate-template-folder` subcommand to create a starter template folder
+- Examples:
+  - `--template-folder ./blep-templates/`
+  - `--template-folder /home/user/my-docs-theme/`
+
 ### Filtering Options
 
 **--exclude <pattern>**
@@ -73,6 +82,45 @@ php bl-doc-gen.php [OPTIONS] <source-path> [<source-path> ...]
 - Displays version number and exits
 - Format: `bl-doc-gen version X.Y.Z`
 - Exit code: 0
+
+## Subcommands
+
+### generate-template-folder
+
+```bash
+blep generate-template-folder [path]
+```
+
+Creates a template folder populated with the built-in default templates, ready for editing.
+
+**Arguments:**
+- `path` (optional) — destination directory. Default: `./blep-templates/`
+
+**Behavior:**
+- Exits with error code 1 if the destination directory already exists
+- Creates the directory and writes five template files into it
+- Prints the path of each created file and a usage hint
+
+**Template files created:**
+- `styles.css` — all CSS for the site (edit this to restyle everything)
+- `index.php` — topic index page
+- `topic.php` — individual topic pages
+- `changelog.php` — recent changes timeline
+- `search.php` — search interface
+
+**Examples:**
+```bash
+# Create ./blep-templates/ with default templates
+blep generate-template-folder
+
+# Create a custom-named theme folder
+blep generate-template-folder ./my-theme/
+```
+
+**After generating, use your templates:**
+```bash
+blep --template-folder ./blep-templates/ src/
+```
 
 ## Exit Codes
 

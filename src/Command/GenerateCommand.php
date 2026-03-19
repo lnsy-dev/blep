@@ -13,6 +13,10 @@ class GenerateCommand
 
     public function run(array $argv): int
     {
+        if (isset($argv[1]) && $argv[1] === 'generate-template-folder') {
+            return $this->runGenerateTemplateFolder($argv);
+        }
+
         $options = $this->parseArgs($argv);
 
         if (empty($options['sources'])) {
@@ -26,6 +30,11 @@ class GenerateCommand
                 fwrite(STDERR, "Error: Source path does not exist: $source\n");
                 return 1;
             }
+        }
+
+        if ($options['templateFolder'] !== null && !is_dir($options['templateFolder'])) {
+            fwrite(STDERR, "Error: Template folder does not exist: {$options['templateFolder']}\n");
+            return 1;
         }
 
         $parser = new BLParser();
@@ -62,7 +71,10 @@ class GenerateCommand
         }
 
         try {
-            $generator = new HtmlGenerator($data, $options['output'], ['title' => $options['title']]);
+            $generator = new HtmlGenerator($data, $options['output'], [
+                'title'          => $options['title'],
+                'templateFolder' => $options['templateFolder'],
+            ]);
             $generator->generate();
             
             $mdGenerator = new MarkdownGenerator($data, $options['output'], ['title' => $options['title']]);
@@ -84,11 +96,12 @@ class GenerateCommand
     private function parseArgs(array $argv): array
     {
         $options = [
-            'sources' => [],
-            'output' => './bl-docs/',
-            'title' => 'Business Logic Documentation',
-            'exclude' => [],
-            'verbose' => false
+            'sources'        => [],
+            'output'         => './bl-docs/',
+            'title'          => 'Business Logic Documentation',
+            'exclude'        => [],
+            'verbose'        => false,
+            'templateFolder' => null,
         ];
 
         for ($i = 1; $i < count($argv); $i++) {
@@ -136,6 +149,15 @@ class GenerateCommand
                 continue;
             }
 
+            if ($arg === '--template-folder') {
+                if (!isset($argv[$i + 1])) {
+                    fwrite(STDERR, "Error: --template-folder requires a value\n");
+                    exit(1);
+                }
+                $options['templateFolder'] = $argv[++$i];
+                continue;
+            }
+
             if ($arg[0] === '-') {
                 fwrite(STDERR, "Error: Unknown option: {$arg}\n");
                 exit(1);
@@ -152,7 +174,8 @@ class GenerateCommand
         printf(<<<USAGE
 Business Logic Documentation Generator v%s
 
-Usage: bldoc [options] <source-path> [<source-path> ...]
+Usage: blep [options] <source-path> [<source-path> ...]
+       blep generate-template-folder [path]
 
 Arguments:
   source-path              One or more PHP files or directories to scan
@@ -160,18 +183,57 @@ Arguments:
 Options:
   -o, --output <dir>       Output directory (default: ./bl-docs/)
   -t, --title <title>      Site title (default: "Business Logic Documentation")
+  --template-folder <dir>  Use custom templates from this directory
   --exclude <pattern>      Exclude pattern (can be used multiple times)
   -v, --verbose            Verbose output
   -h, --help               Show this help
   --version                Show version
 
+Subcommands:
+  generate-template-folder [path]
+                           Create a template folder with default templates
+                           for editing. Default path: ./blep-templates/
+
 Examples:
-  bldoc src/
-  bldoc -o docs/ -t "My Project" src/ lib/
-  bldoc --exclude vendor/ --exclude tests/ .
+  blep src/
+  blep -o docs/ -t "My Project" src/ lib/
+  blep --exclude vendor/ --exclude tests/ .
+  blep generate-template-folder
+  blep generate-template-folder ./my-theme/
+  blep --template-folder ./my-theme/ src/
 
 USAGE
 , self::VERSION);
+    }
+
+    private function runGenerateTemplateFolder(array $argv): int
+    {
+        $targetDir = rtrim($argv[2] ?? './blep-templates', '/');
+
+        if (is_dir($targetDir)) {
+            fwrite(STDERR, "Error: Directory already exists: $targetDir\n");
+            fwrite(STDERR, "Delete it or specify a different path.\n");
+            return 1;
+        }
+
+        mkdir($targetDir, 0755, true);
+
+        $builtinDir = __DIR__ . '/../Templates';
+        $templates = ['index.php', 'topic.php', 'changelog.php', 'search.php', 'styles.css'];
+
+        foreach ($templates as $tpl) {
+            file_put_contents("$targetDir/$tpl", file_get_contents("$builtinDir/$tpl"));
+        }
+
+        echo "Template folder created: $targetDir\n";
+        echo "Files created:\n";
+        foreach ($templates as $tpl) {
+            echo "  $targetDir/$tpl\n";
+        }
+        echo "\nEdit these files to customize your documentation theme.\n";
+        echo "Then run: blep --template-folder $targetDir <source-path>\n";
+
+        return 0;
     }
 
     private function shouldExclude(string $path, array $patterns): bool

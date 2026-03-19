@@ -108,6 +108,7 @@ bldoc -v src/ lib/
 |--------|-------------|---------|
 | `-o, --output <dir>` | Output directory | `./bl-docs/` |
 | `-t, --title <title>` | Site title | `"Business Logic Documentation"` |
+| `--template-folder <dir>` | Custom template folder path | None |
 | `--exclude <pattern>` | Exclude pattern (repeatable) | None |
 | `-v, --verbose` | Show each file as it's parsed | Off |
 | `-h, --help` | Show help message | — |
@@ -245,6 +246,49 @@ Each detail includes:
 - Recent change history (last 5 commits affecting that line)
 - Rationale in collapsible "Why?" sections
 - Code snippets in collapsible sections
+
+## Customizing Output
+
+Blep supports custom HTML templates so you can change the look and feel of generated documentation.
+
+### Quick Start
+
+1. Generate the default template folder:
+   ```bash
+   blep generate-template-folder
+   # or specify a custom path:
+   blep generate-template-folder ./my-theme/
+   ```
+
+2. Edit the template files in `./blep-templates/`:
+   - `styles.css` — all CSS for the site
+   - `index.php` — topic index page
+   - `topic.php` — individual topic pages
+   - `changelog.php` — recent changes timeline
+   - `search.php` — search interface
+
+3. Generate documentation using your templates:
+   ```bash
+   blep --template-folder ./blep-templates/ src/
+   ```
+
+### Template Variables
+
+Each template receives PHP variables you can use:
+
+**All pages:** `$siteTitle` (string), `$timestamp` (string), `$styles` (string — the rendered `<style>` block from `styles.css`)
+
+**`index.php`:** `$topics` — array of `['name' => string, 'slug' => string]`
+
+**`topic.php`:** `$topicName` (string), `$slug` (string), `$content` (string — pre-rendered HTML for the subtopics block)
+
+**`changelog.php`:** `$content` (string — pre-rendered HTML for the changelog entries)
+
+**`search.php`:** No additional variables (the search JS fetches `search-index.json` at runtime)
+
+### Partial Overrides
+
+You don't need to override all five files. Any template file missing from your folder falls back to the built-in default. To change only the CSS, just put a `styles.css` in your template folder — everything else uses the defaults automatically.
 
 ## Version Control Support
 

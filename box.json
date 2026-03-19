@@ -13,6 +13,10 @@
             "name": "*.php",
             "in": "src",
             "exclude": []
+        },
+        {
+            "name": "*.css",
+            "in": "src/Templates"
         }
     ],
     "compression": "GZ",
