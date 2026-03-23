@@ -19,7 +19,7 @@
         "php": ">=7.4"
     },
     "require-dev": {
-        "pestphp/pest": "^1.23",
+        "pestphp/pest": "^3.0",
         "humbug/box": "^4.0"
     },
     "bin": [

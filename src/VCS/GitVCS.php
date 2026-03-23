@@ -57,12 +57,12 @@ class GitVCS implements VCSInterface
     public static function isAvailable(string $filePath): bool
     {
         $dir = dirname($filePath);
-        while ($dir !== '/') {
+        while ($dir !== '/' && dirname($dir) !== $dir) {
             if (is_dir($dir . '/.git')) {
                 return true;
             }
             $dir = dirname($dir);
         }
-        return false;
+        return is_dir($dir . '/.git');
     }
 }

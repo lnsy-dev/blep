@@ -251,41 +251,57 @@ class BLParser
         
         // Find the actual function/class declaration
         $foundFunction = false;
+        $isClass = false;
         for ($i = $start; $i < min($start + 10, count($lines)); $i++) {
             if (preg_match('/^\s*(public|private|protected|function|class)\s/', $lines[$i])) {
                 $start = $i;
                 $foundFunction = true;
+                $isClass = (bool) preg_match('/^\s*class\s/', $lines[$i]);
                 break;
             }
         }
-        
+
         if (!$foundFunction) {
             return implode("\n", array_slice($lines, max(0, $centerLine - $contextLines), $contextLines * 2 + 1));
         }
-        
+
+        // For class-level declarations (file-level docblocks), show the
+        // docblock + class signature so the user sees the full annotation
+        // context without the method bodies that follow.
+        if ($isClass) {
+            $docStart = $centerLine;
+            for ($i = $centerLine; $i >= 0; $i--) {
+                if (preg_match('#/\*#', $lines[$i])) {
+                    $docStart = $i;
+                    break;
+                }
+            }
+            return implode("\n", array_slice($lines, $docStart, $start - $docStart + 1));
+        }
+
         // Find the end of the function (matching braces)
         $braceCount = 0;
         $inFunction = false;
         $end = $start;
-        
+
         for ($i = $start; $i < count($lines); $i++) {
             $line = $lines[$i];
             $braceCount += substr_count($line, '{') - substr_count($line, '}');
-            
+
             if (strpos($line, '{') !== false) {
                 $inFunction = true;
             }
-            
+
             if ($inFunction && $braceCount === 0) {
                 $end = $i;
                 break;
             }
         }
-        
+
         if ($end <= $start) {
             $end = min(count($lines) - 1, $start + 20);
         }
-        
+
         return implode("\n", array_slice($lines, $start, $end - $start + 1));
     }
 }
